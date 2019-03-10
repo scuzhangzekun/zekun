@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/zhangzekun/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/zhangzekun/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/zhangzekun/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/zhangzekun/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/zhangzekun/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/zhangzekun/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/zhangzekun/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ggplot2,R,fundamental,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="创建一个散点图ggplot2中，图是用“+”串起来的，每个函数都有属于自己的一部分。下面就创建一个最基础的散点图。 创建一个简单的散点图123456#需要依赖ggplot2包#没有安装请执行&quot;install.packages(ggplot2)&quot;library(ggplot2)ggplot(mtcars, aes(x=wt,y=mpg)) +  geom_point() +  labs(title">
+<meta name="keywords" content="ggplot2,R,fundamental">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ggplot2 基础语法">
+<meta property="og:url" content="https://scuzhangzekun.github.io/2019/03/10/ggplot2-基础语法/index.html">
+<meta property="og:site_name" content="Zekun&#39;s Blog">
+<meta property="og:description" content="创建一个散点图ggplot2中，图是用“+”串起来的，每个函数都有属于自己的一部分。下面就创建一个最基础的散点图。 创建一个简单的散点图123456#需要依赖ggplot2包#没有安装请执行&quot;install.packages(ggplot2)&quot;library(ggplot2)ggplot(mtcars, aes(x=wt,y=mpg)) +  geom_point() +  labs(title">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/2.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/3.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/4.png?raw=true">
+<meta property="og:updated_time" content="2019-03-10T02:31:05.938Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ggplot2 基础语法">
+<meta name="twitter:description" content="创建一个散点图ggplot2中，图是用“+”串起来的，每个函数都有属于自己的一部分。下面就创建一个最基础的散点图。 创建一个简单的散点图123456#需要依赖ggplot2包#没有安装请执行&quot;install.packages(ggplot2)&quot;library(ggplot2)ggplot(mtcars, aes(x=wt,y=mpg)) +  geom_point() +  labs(title">
+<meta name="twitter:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/2.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zhangzekun/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scuzhangzekun.github.io/2019/03/10/ggplot2-基础语法/">
+
+
+
+
+
+  <title>ggplot2 基础语法 | Zekun's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/zhangzekun/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zekun's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/zhangzekun/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/zhangzekun/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/zhangzekun/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标&emsp;&emsp;签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/zhangzekun/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/zhangzekun/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/03/10/ggplot2-基础语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Zekun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zekun's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ggplot2 基础语法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T08:40:07+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/zhangzekun/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="创建一个散点图"><a href="#创建一个散点图" class="headerlink" title="创建一个散点图"></a>创建一个散点图</h1><p>ggplot2中，图是用“+”串起来的，每个函数都有属于自己的一部分。下面就创建一个最基础的散点图。</p>
+<h2 id="创建一个简单的散点图"><a href="#创建一个简单的散点图" class="headerlink" title="创建一个简单的散点图"></a>创建一个简单的散点图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#需要依赖ggplot2包</span></span><br><span class="line"><span class="comment">#没有安装请执行"install.packages(ggplot2)"</span></span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line">ggplot(mtcars, aes(x=wt,y=mpg)) +</span><br><span class="line">  geom_point() +</span><br><span class="line">  labs(title = <span class="string">"Automobile Data"</span>, x=<span class="string">"Weight"</span>, y=<span class="string">"Miles Per Gallon"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/2.png?raw=true" alt="Markdown"></p>
+<p>我们来分解这个作图步骤：</p>
+<ul>
+<li>ggplot()函数初始化了图形并且指定了数据源为mtcars，aes()函数则是代表aesthetics，即使用视觉效果呈现信息，我们在这里指定了x轴的信息是wt(汽车重量)，y轴的信息是mpg(每米所消耗的油量);</li>
+<li>geom_point()表面了我们希望绘制散点图的想法；</li>
+<li>labs()是说明我们需要在图上增加注释，标题、x、y轴标签。</li>
+</ul>
+<a id="more"></a>
+<h2 id="创建一个带有线性拟合的散点图"><a href="#创建一个带有线性拟合的散点图" class="headerlink" title="创建一个带有线性拟合的散点图"></a>创建一个带有线性拟合的散点图</h2><p>这样绘制一个散点图难免感觉过于单调，于是我们可以尝试以下内容，来丰富我们的图件。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line">ggplot(mtcars, aes(x=wt,y=mpg)) +</span><br><span class="line">  geom_point(pch=<span class="number">17</span>,color=<span class="string">"blue"</span>,size=<span class="number">2</span>) +</span><br><span class="line">  geom_smooth(method = <span class="string">"lm"</span>, color=<span class="string">"red"</span>, linetype=<span class="number">2</span>) +</span><br><span class="line">  labs(title = <span class="string">"Automobile Data"</span>, x=<span class="string">"Weight"</span>, y=<span class="string">"Miles Per Gallon"</span>)</span><br></pre></td></tr></table></figure>
+<p>我们发现我们增加了一些内容。</p>
+<ul>
+<li>geom_point(pch=17,color=”blue”,size=2)中，pch指定了点的形状，color指定了点的填充颜色，size指定了点的大小，能够明显感觉到点变大了。</li>
+<li>geom_smooth(method=”lm”,color=”red”,linetype=2)则是增加了一条平滑的曲线，我们使用的method是线性拟合(method=”lm”)，并且color=”red”指定了颜色为红色，linetype=2指定了线型为虚线。值得注意的是，默认情况下，这条平滑的曲线是包括在95%置信区间(暗带)中的。关于线性拟合的内容会在以后分享。</li>
+</ul>
+<h2 id="创建一个分组的散点图"><a href="#创建一个分组的散点图" class="headerlink" title="创建一个分组的散点图"></a>创建一个分组的散点图</h2><p>ggplot2为我们提供了分组和小面化的方法。分组是指在一个图形中显示多组数据观察结果，小面化则是值在单独、并排的图形是显示观察组。</p>
+<blockquote>
+<p><strong>注意</strong>： ggplot2在定义组或者面时使用的是因子型数据。</p>
+</blockquote>
+<p>我们可以使用mtcars中的am、vs、cyl变量来进行分组。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#先把这些变量转化为因子型</span></span><br><span class="line">mtcars$cyl &lt;- factor(mtcars$cyl)</span><br><span class="line">mtcars$vs &lt;- factor(mtcars$vs, levels = c(<span class="number">0</span>,<span class="number">1</span>),</span><br><span class="line">                    labels = c(<span class="string">"V-Engine"</span>,<span class="string">"Straight Engine"</span>))</span><br><span class="line">mtcars$am &lt;- factor(mtcars$am, levels = c(<span class="number">0</span>,<span class="number">1</span>),</span><br><span class="line">                    labels = c(<span class="string">"Automatic"</span>,<span class="string">"Manual"</span>))</span><br><span class="line"><span class="comment">#开始绘制图像</span></span><br><span class="line">ggplot(mtcars,aes(x=wt,y=mpg, shape=cyl, color=cyl)) +</span><br><span class="line">  geom_point(size=<span class="number">3</span>) +</span><br><span class="line">  facet_grid(am~vs) +</span><br><span class="line">  labs(title = <span class="string">"Automobile Data by Engine Type"</span>,</span><br><span class="line">       x=<span class="string">"Weight"</span>, y=<span class="string">"Miles Per Gallon"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/3.png?raw=true" alt="plot2"></p>
+<p>从图中我们看到，每个点的颜色和形状代表了不同的汽车发动机气缸数量，而不同的分组和面则表示了变速箱类型（自动还是手动），发动机装置（V型还是直列式）</p>
+<h1 id="常见的几何函数指定图形类型"><a href="#常见的几何函数指定图形类型" class="headerlink" title="常见的几何函数指定图形类型"></a>常见的几何函数指定图形类型</h1><p>ggplot()需要我们指定绘制的数据源和变量，几何函数则是制定我们需要绘制图表的类型。常见的图表有以下这些：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>添加</th>
+<th>选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>geom_bar()</td>
+<td>条形图</td>
+<td>color,fill,alpha</td>
+</tr>
+<tr>
+<td>geom_boxplot()</td>
+<td>箱线图</td>
+<td>color,fill,alpha,notch,width</td>
+</tr>
+<tr>
+<td>geom_density()</td>
+<td>密度图</td>
+<td>color,fill,alpha,linetype</td>
+</tr>
+<tr>
+<td>geom_histogram()</td>
+<td>直方图</td>
+<td>color,fill,alpha,linetype,binwidth</td>
+</tr>
+<tr>
+<td>geom_hline()</td>
+<td>水平线</td>
+<td>color,alpha,,linetype,size</td>
+</tr>
+<tr>
+<td>geom_jitter()</td>
+<td>抖动点</td>
+<td>color,alpha,size,shape</td>
+</tr>
+<tr>
+<td>geom_line()</td>
+<td>线图</td>
+<td>color,alpha,linetype,size</td>
+</tr>
+<tr>
+<td>geom_point()</td>
+<td>点图</td>
+<td>color,fill,alpha</td>
+</tr>
+<tr>
+<td>geom_rug()</td>
+<td>地毯图</td>
+<td>color,alpha,shape,size</td>
+</tr>
+<tr>
+<td>geom_smooth()</td>
+<td>拟合曲线</td>
+<td>method,formula,color,fill,linetype,size</td>
+</tr>
+<tr>
+<td>geom_text()</td>
+<td>文字注解</td>
+<td>参见“帮助”</td>
+</tr>
+<tr>
+<td>geom_violin()</td>
+<td>小提琴图</td>
+<td>color,fill,alpha,linetype</td>
+</tr>
+<tr>
+<td>geom_vline()</td>
+<td>垂线</td>
+<td>color,alpha,linetype,size</td>
+</tr>
+</tbody>
+</table>
+<p>对于这些函数中的选项，其实也是有章可循的。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>color</td>
+<td>对点、线、面的轮廓进行着色</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>对面的内部区域进行着色</td>
+</tr>
+<tr>
+<td>alpha</td>
+<td>颜色的透明度，0是完全透明，1是不透明</td>
+</tr>
+<tr>
+<td>linetype</td>
+<td>图案线条(1=实线，2=虚线，3=点，4=点破折号，5=长破折号，6=双破折号)</td>
+</tr>
+<tr>
+<td>size</td>
+<td>尺寸大小</td>
+</tr>
+<tr>
+<td>shape</td>
+<td>点的形状(0=开放的长方形，1=开放的圆形，2=开饭的三角形)</td>
+</tr>
+<tr>
+<td>position</td>
+<td>对条形图来说，“dodge”将分组条形图并排显示，“stacked”堆叠分组条形图，“fill”垂直堆叠分组条形图并规范其高度一致。对于点来说，“jitter”减少点的重叠</td>
+</tr>
+<tr>
+<td>binwidth</td>
+<td>直方图的宽度</td>
+</tr>
+<tr>
+<td>notch</td>
+<td>表示方块图是否有缺口（true/false）</td>
+</tr>
+<tr>
+<td>sides</td>
+<td>地毯图的安置(“b”=底部，”l”=左边，”t”=上部，”r”=右部，”bl”=左下部)</td>
+</tr>
+<tr>
+<td>width</td>
+<td>箱线图的宽度</td>
+</tr>
+</tbody>
+</table>
+<p>用我们最常见的mtcars数据集创建一个箱线图。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ggplot(mtcars, aes(x=factor(gear),y=disp))+</span><br><span class="line">  geom_boxplot(fill=<span class="string">"cornflowerblue"</span>,</span><br><span class="line">               color=<span class="string">"black"</span>,notch = <span class="literal">FALSE</span>) +</span><br><span class="line">  geom_point(position = <span class="string">"jitter"</span>,color=<span class="string">"red"</span>,alpha=<span class="number">.5</span>) +</span><br><span class="line">  geom_rug(sides = <span class="string">"l"</span>, color=<span class="string">"orange"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/4.png?raw=true" alt="plot3"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/zhangzekun/tags/ggplot2/" rel="tag"># ggplot2</a>
+          
+            <a href="/zhangzekun/tags/R/" rel="tag"># R</a>
+          
+            <a href="/zhangzekun/tags/fundamental/" rel="tag"># fundamental</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zhangzekun/2019/03/09/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/zhangzekun/2019/03/10/R语言数据结构/" rel="prev" title="R语言数据结构">
+                R语言数据结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true" alt="Zhang Zekun">
+            
+              <p class="site-author-name" itemprop="name">Zhang Zekun</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/zhangzekun/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/zhangzekun/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/zhangzekun/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/scuzhangzekun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="zhangzekun_2019@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个散点图"><span class="nav-number">1.</span> <span class="nav-text">创建一个散点图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个简单的散点图"><span class="nav-number">1.1.</span> <span class="nav-text">创建一个简单的散点图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个带有线性拟合的散点图"><span class="nav-number">1.2.</span> <span class="nav-text">创建一个带有线性拟合的散点图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个分组的散点图"><span class="nav-number">1.3.</span> <span class="nav-text">创建一个分组的散点图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的几何函数指定图形类型"><span class="nav-number">2.</span> <span class="nav-text">常见的几何函数指定图形类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Zekun</span>
+</div>
+
+
+
+<span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span>人次
+ </span>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<span id="busuanzi_container_site_pv">
+总访问量:<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+<span class="post-meta-divider">|</span>
+
+
+<div class="theme-info">
+<div class="powered-by"></div>
+<span class="post-count">博客全站共9.2k字</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/zhangzekun/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/zhangzekun/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/zhangzekun/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/zhangzekun/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/zhangzekun/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/zhangzekun/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/zhangzekun/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/zhangzekun/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/zhangzekun/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/zhangzekun/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/zhangzekun/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="R,fundamental,data structure,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在基础的R环境下，数据结构主要分为了以下几类：  向量 矩阵 数组 数据框 因子 列表  向量向量是用于存储数值型、字符型或逻辑型数据的一维数组。我们可以通过执行c()函数来创建一个向量。你可以尝试执行以下代码来查看结果。 123a &amp;lt;- c(1,2,3,4,5,-3,5)b &amp;lt;- c(&quot;R&quot;,&quot;Python&quot;,&quot;C&quot;,&quot;C++&quot;)c &amp;lt;- c(TRUE, FALSE,FALSE">
+<meta name="keywords" content="R,fundamental,data structure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言数据结构">
+<meta property="og:url" content="https://scuzhangzekun.github.io/2019/03/10/R语言数据结构/index.html">
+<meta property="og:site_name" content="Zekun&#39;s Blog">
+<meta property="og:description" content="在基础的R环境下，数据结构主要分为了以下几类：  向量 矩阵 数组 数据框 因子 列表  向量向量是用于存储数值型、字符型或逻辑型数据的一维数组。我们可以通过执行c()函数来创建一个向量。你可以尝试执行以下代码来查看结果。 123a &amp;lt;- c(1,2,3,4,5,-3,5)b &amp;lt;- c(&quot;R&quot;,&quot;Python&quot;,&quot;C&quot;,&quot;C++&quot;)c &amp;lt;- c(TRUE, FALSE,FALSE">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/2.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/4.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/6.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/7.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/9.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/14.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/15.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/16.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/17.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/18.png?raw=true">
+<meta property="og:updated_time" content="2019-03-10T02:31:28.162Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R语言数据结构">
+<meta name="twitter:description" content="在基础的R环境下，数据结构主要分为了以下几类：  向量 矩阵 数组 数据框 因子 列表  向量向量是用于存储数值型、字符型或逻辑型数据的一维数组。我们可以通过执行c()函数来创建一个向量。你可以尝试执行以下代码来查看结果。 123a &amp;lt;- c(1,2,3,4,5,-3,5)b &amp;lt;- c(&quot;R&quot;,&quot;Python&quot;,&quot;C&quot;,&quot;C++&quot;)c &amp;lt;- c(TRUE, FALSE,FALSE">
+<meta name="twitter:image" content="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/2.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zhangzekun/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scuzhangzekun.github.io/2019/03/10/R语言数据结构/">
+
+
+
+
+
+  <title>R语言数据结构 | Zekun's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/zhangzekun/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zekun's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/zhangzekun/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/zhangzekun/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/zhangzekun/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标&emsp;&emsp;签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/zhangzekun/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/zhangzekun/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/03/10/R语言数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Zekun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zekun's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">R语言数据结构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T08:40:25+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/zhangzekun/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在基础的R环境下，数据结构主要分为了以下几类：</p>
+<ul>
+<li>向量</li>
+<li>矩阵</li>
+<li>数组</li>
+<li>数据框</li>
+<li>因子</li>
+<li>列表</li>
+</ul>
+<h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><p>向量是用于存储数值型、字符型或逻辑型数据的一维数组。我们可以通过执行c()函数来创建一个向量。你可以尝试执行以下代码来查看结果。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a &lt;- c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,-<span class="number">3</span>,<span class="number">5</span>)</span><br><span class="line">b &lt;- c(<span class="string">"R"</span>,<span class="string">"Python"</span>,<span class="string">"C"</span>,<span class="string">"C++"</span>)</span><br><span class="line">c &lt;- c(<span class="literal">TRUE</span>, <span class="literal">FALSE</span>,<span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>值得注意的是，一个向量中存储的数据必须类型一致，不能出现混杂，否则就会报错。</p>
+</blockquote>
+<p>我们应该灵活运用向量，这样就能提高数据分析的效率。例如我们希望取出刚才案例中的a向量第3,4,6,7位的数，如果是一个一个取那么效率将会大大降低，我们可以选择向量来进行提取。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[c(<span class="number">3</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>)]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>a[c(3,4,6,7)]<br>[1] 3 4 -3 5</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h1><h2 id="创建矩阵"><a href="#创建矩阵" class="headerlink" title="创建矩阵"></a>创建矩阵</h2><p>矩阵是一个二维数组，同样每个元素的类型都必须一致（数值型、字符型或逻辑型）。我们可以通过 matrix() 函数进行创建。</p>
+<p><em>matrix&lt;-matrix(vector,nrow=number_of_row,ncol=number_of_col,byrow=logical_value,<br>dimnames=list(char_vector_rowname,char_vector_colnames))</em></p>
+<p>其中，vector是指矩阵的元素内容； nrow和 ncol 分别是指定行和列的数量； dimnames 包含了一个列表，这个后面会专门介绍，这个变量则是指定行与列的名称； byrow 则是表明矩阵是否按照行进行填充，赋值时使用的是逻辑型变量，默认按照列进行填充（这样的数据表更适合后续分析）。可以通过尝试以下代码查看结果。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建一个5x4的矩阵</span></span><br><span class="line">y &lt;- matrix(<span class="number">1</span>:<span class="number">20</span>,nrow=<span class="number">5</span>,ncol=<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/2.png?raw=true" alt="Markdown"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#按行填充的3x3矩阵</span></span><br><span class="line">kda &lt;- c(<span class="number">0</span>,<span class="number">15</span>,<span class="number">6</span>,</span><br><span class="line">         <span class="number">13</span>,<span class="number">6</span>,<span class="number">23</span>,</span><br><span class="line">         <span class="number">4</span>,<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">rnames &lt;- c(<span class="string">"瓜皮"</span>,<span class="string">"大佬"</span>,<span class="string">"菜鸡"</span>)</span><br><span class="line">cnames &lt;- c(<span class="string">"kill"</span>,<span class="string">"death"</span>,<span class="string">"assistance"</span>)</span><br><span class="line">kda_matrix &lt;- matrix(kda,nrow = <span class="number">3</span>,ncol = <span class="number">3</span>,byrow = <span class="literal">TRUE</span>,dimnames = list(rnames,cnames))</span><br><span class="line">kda_matrix</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.png?raw=true" alt="markdown"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#按列填充的3x3矩阵，对不住菜鸡了</span></span><br><span class="line">kda_matrix_false &lt;- matrix(kda,nrow = <span class="number">3</span>,ncol = <span class="number">3</span>,byrow = <span class="literal">FALSE</span>,dimnames = list(rnames,cnames))</span><br><span class="line">kda_matrix_false</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/4.png?raw=true" alt="markdown"></p>
+<h2 id="矩阵下标的使用"><a href="#矩阵下标的使用" class="headerlink" title="矩阵下标的使用"></a>矩阵下标的使用</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x &lt;- matrix(<span class="number">1</span>:<span class="number">10</span>,ncol = <span class="number">5</span>)</span><br><span class="line">x</span><br><span class="line">x[<span class="number">2</span>,]</span><br><span class="line">x[,<span class="number">2</span>]</span><br><span class="line">x[<span class="number">1</span>,c(<span class="number">3</span>,<span class="number">5</span>)]</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.png?raw=true" alt="markdown"></p>
+<p>我们首先创建了一个内容为1至10的2x5的矩阵，默认情况下是按照列进行填充。我先选择了第二行的元素，然后选择了第二列的元素，最后一次我们选择了第一行的第三和第五列的元素。</p>
+<p>矩阵十分适合我们处理二维数据，但是涉及到三维的数据，或许我们就需要使用接下来的这种数据类型了。</p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h2 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h2><p>数组和矩阵十分类似，但是他的维度大于2.我们可以使用array()来创建数组。</p>
+<p><em>array &lt;- array(vector,dimensions,dimnames)</em></p>
+<p>其中vector包含了数组中的数据，dimensions是一个数值型向量，给出了各个维度下标的最大值，而 dimnames是各维度名称标签列表。可以尝试运行以下代码查看结果。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type &lt;- c(<span class="string">"瓜皮"</span>,<span class="string">"大佬"</span>)</span><br><span class="line">kda_number &lt;- c(<span class="string">"kill"</span>,<span class="string">"death"</span>,<span class="string">"assistance"</span>)</span><br><span class="line">team_name &lt;- c(<span class="string">"蛇皮队"</span>,<span class="string">"建桥鬼才队"</span>,<span class="string">"麻瓜队"</span>)</span><br><span class="line">z &lt;- array(<span class="number">1</span>:<span class="number">24</span>,c(<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>),dimnames = list(type,kda_number,team_name))</span><br><span class="line">z</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/6.png?raw=true" alt="markdown"></p>
+<h2 id="数组下标的使用"><a href="#数组下标的使用" class="headerlink" title="数组下标的使用"></a>数组下标的使用</h2><p>如果我们想看一下 建桥鬼才队瓜皮选手的死亡次数，那么应该怎么做呢？</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>注意数组的下标是按照“列，行，维度”的顺序查看的。但是因为我查看数据的习惯的“维度-列-行”的顺序，所以在访问数组下标的时候填写的顺序也是如此。</p>
+<h1 id="数据框"><a href="#数据框" class="headerlink" title="数据框"></a>数据框</h1><p>前面我们提到，矩阵内部的元素要求都是一种类型的。但是我们在实际的分析过程中，许多的表格列数据的类型往往都并不相同。在R语言中，数据框的存在可以解决这个问题。</p>
+<p>在分析对比矩阵和数据框的差别之前，我先介绍一下数据框的创建。</p>
+<h2 id="数据框的创建"><a href="#数据框的创建" class="headerlink" title="数据框的创建"></a>数据框的创建</h2><p>我们使用 data.frame()函数进行创建。</p>
+<p>data_frame &lt;- data.frame(col1 ,col2, col3, …)</p>
+<p>其中列向量 col1，col2，col3等可以为任何类型。可以运行一下代码查看结果。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">playerID &lt;- c(<span class="number">3947</span>,<span class="number">1234</span>,<span class="number">6758</span>)</span><br><span class="line">age &lt;- c(<span class="number">23</span>,<span class="number">18</span>,<span class="number">19</span>)</span><br><span class="line">place &lt;- c(<span class="string">"TOP"</span>,<span class="string">"MID"</span>,<span class="string">"ADC"</span>)</span><br><span class="line">playerdata &lt;- data.frame(playerID,age,place)</span><br><span class="line">playerdata</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/7.png?raw=true" alt="markdown"></p>
+<h2 id="数据框和矩阵最明显的区别"><a href="#数据框和矩阵最明显的区别" class="headerlink" title="数据框和矩阵最明显的区别"></a>数据框和矩阵最明显的区别</h2><p>接下来的代码将会展示数据框和矩阵之间最明显的区别，即所有元素的类型是否应该一样。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">matrix2 &lt;- matrix(c(playerID,age,place),nrow = <span class="number">3</span>)</span><br><span class="line">matrix2;playerdata</span><br><span class="line">matrix2[,<span class="number">2</span>];playerdata[,<span class="number">2</span>]</span><br><span class="line">class(playerdata[,<span class="number">2</span>]);class(matrix2[,<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.png?raw=true" alt="markdown"></p>
+<p>我们发现数据框第二列的数据是我们希望的数值型，但是到了矩阵，第二列的数据变成了字符型。如果你尝试查看其他列，得到的结果也是一样的。所以我们在实际分析数据的时候，应该是以数据框为基础，而不是矩阵。而且在矩阵转化为数据框的时候，也应该仔细检查数据列的格式是否是我们期望的那样，避免不必要的报错。</p>
+<h2 id="数据框元素的选择"><a href="#数据框元素的选择" class="headerlink" title="数据框元素的选择"></a>数据框元素的选择</h2><p>我们有两种方式选择列。第一种是按照列名称来选择，第二种是按照列序号来选择。</p>
+<h3 id="按照列名称来选择"><a href="#按照列名称来选择" class="headerlink" title="按照列名称来选择"></a>按照列名称来选择</h3><p>R自带了一个数据集 mtcars，他的格式是data.frame，我们可以使用它来讲解。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#看一下mtcars数据集的内容,关于提取data.frame的行内容后面会介绍</span></span><br><span class="line">mtcars[<span class="number">1</span>:<span class="number">5</span>,]</span><br><span class="line"><span class="comment">#为了得知mtcars数据集的详细信息</span></span><br><span class="line">?mtcars</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/9.png?raw=true" alt="d"></p>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.png?raw=true" alt="d"></p>
+<p>为了我们后面分享的方便，在这里对这个数据集的各个维度的内容进行翻译。</p>
+<table>
+<thead>
+<tr>
+<th>列名称</th>
+<th>中文解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mpg</td>
+<td>每加仑燃料能行驶的距离（米）</td>
+</tr>
+<tr>
+<td>cyl</td>
+<td>气缸数量</td>
+</tr>
+<tr>
+<td>disp</td>
+<td>排量</td>
+</tr>
+<tr>
+<td>hp</td>
+<td>马力</td>
+</tr>
+<tr>
+<td>drat</td>
+<td>后轴比率</td>
+</tr>
+<tr>
+<td>wt</td>
+<td>重量（1000磅）</td>
+</tr>
+<tr>
+<td>qsec</td>
+<td>0.25米花费时间（我也不知道这个是啥）</td>
+</tr>
+<tr>
+<td>vs</td>
+<td>发动机是否为直线型的（0为V型，1为直线型，这个变量我也不懂）</td>
+</tr>
+<tr>
+<td>am</td>
+<td>是否为手动挡（0为手动挡，1为手动挡）</td>
+</tr>
+<tr>
+<td>gear</td>
+<td>前面齿轮的数量</td>
+</tr>
+<tr>
+<td>carb</td>
+<td>汽化器数量</td>
+</tr>
+</tbody>
+</table>
+<p>那现在我们需要提取 mpg 这一列，我们需要写出这样的代码：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mtcars$mpg</span><br><span class="line"><span class="comment">#如果你想提取这一列的特定行数的数据可以执行下面的代码</span></span><br><span class="line">mtcars$mpg[c(<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>)]</span><br></pre></td></tr></table></figure>
+<p>在执行的时候我们会产生一个新的想法：我不想每次都执行 mtcars$[列名称] ，那么应该怎么办呢？这就牵出了另一个知识点。</p>
+<h3 id="attach和detach函数以及with"><a href="#attach和detach函数以及with" class="headerlink" title="attach和detach函数以及with"></a>attach和detach函数以及with</h3><h4 id="attch和detach"><a href="#attch和detach" class="headerlink" title="attch和detach"></a>attch和detach</h4><p>我们如果需要绘制一个含有 mpg 和 wt 信息的散点图，按照刚才的提取方法，我们的代码应该长这个样子。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot(mtcars$mpg,mtcars$wt)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.png?raw=true" alt="d"></p>
+<p>我们必须强调两次 <em>mtcars</em>，这样写感觉很麻烦，如果变量多了，看起来也不是很整洁。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#因为我们并不存在跨data.frame的情况，因此比较推荐以下写法</span></span><br><span class="line"><span class="keyword">attach</span>(mtcars)   <span class="comment">#绑定mtcars数据，接下来涉及到变量的直接输入列名称即可</span></span><br><span class="line">plot(mpg,wt)</span><br><span class="line">plot(mpg,disp)     </span><br><span class="line"><span class="keyword">detach</span>(mtcars)   <span class="comment">#解绑，这样就不会影响到后续跨data.frame的分析内容</span></span><br></pre></td></tr></table></figure>
+<p>但是麻烦的地方同样存在，这种写法并不适用于名称相同的对象，例如：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mpg &lt;- c(<span class="number">25</span>,<span class="number">36</span>,<span class="number">47</span>)</span><br><span class="line"><span class="keyword">attach</span>(mtcars)</span><br><span class="line">plot(mpg,wt)</span><br><span class="line">mpg</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.png?raw=true" alt="d"></p>
+<p>这里，在我们绑定数据框之前，我们的环境中已经有一个名为 mpg 的对象，在这种情况下，原来的对象具有优先权，这会屏蔽我们想要的mtcars数据集中的 mpg 内容。</p>
+<blockquote>
+<p>注意提示信息中关于 masked 的信息。</p>
+</blockquote>
+<h4 id="with"><a href="#with" class="headerlink" title="with"></a>with</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上面的代码可以用另外一种方式来写</span></span><br><span class="line">mpg &lt;- c(<span class="number">25</span>,<span class="number">36</span>,<span class="number">47</span>)</span><br><span class="line">with(mtcars, &#123;</span><br><span class="line">  plot(mpg,wt)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这次就再也没有报错了。这种情况下，我们{}之间的函数只是针对mtcars执行，这就无需担心名称冲突的问题了。其实如果我们只是执行一个函数，那么{}都可以直接省略。</p>
+<p>也正因如此，我们也要注意，在with()中的赋值，在with()以外并不生效。除非我们使用特殊赋值 &lt;&lt;-才可以。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#一般的赋值</span></span><br><span class="line">with(mtcars, &#123;</span><br><span class="line">  stats &lt;- summary(mpg)</span><br><span class="line">  stats</span><br><span class="line">&#125;)</span><br><span class="line">stats</span><br><span class="line"><span class="comment">#特殊的赋值</span></span><br><span class="line">with(mtcars, &#123;</span><br><span class="line">  stats1 &lt;&lt;- summary(mpg)</span><br><span class="line">  stats1</span><br><span class="line">&#125;)</span><br><span class="line">stats1</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/14.png?raw=true" alt="d"></p>
+<h3 id="按照列序号选择"><a href="#按照列序号选择" class="headerlink" title="按照列序号选择"></a>按照列序号选择</h3><p>话说回来，我们介绍第二种提取列信息的方式，即按照列序号提取。<br>同样我们提取mtcars的mpg这一列。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mtcars[,<span class="number">1</span>]</span><br><span class="line"><span class="comment">#如果你想提取这一列的特定行数的数据可以执行下面的代码</span></span><br><span class="line">mtcars[,<span class="number">1</span>][c(<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>)]</span><br></pre></td></tr></table></figure>
+<p>效果和按照列名称提取的一样，我就不贴图了。</p>
+<h1 id="因子"><a href="#因子" class="headerlink" title="因子"></a>因子</h1><p>我们可以将R中的变量归结出</p>
+<ul>
+<li>名义型变量</li>
+<li>有序型变量</li>
+<li>连续型变量</li>
+</ul>
+<p>函数factor()是用一个整数向量的形式存储类别值，整数取值范围为[1…k] (k为名义型变量中唯一值的个数)，具体的赋值是按照字母顺序来分配的。例如我们将学生成绩分为poor,good,excellent。那么向量编码会将这三个类型分为(3,2,1)。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">status &lt;- c(<span class="string">"good"</span>,<span class="string">"poor"</span>,<span class="string">"excellent"</span>,<span class="string">"good"</span>)</span><br><span class="line">status_factor &lt;- factor(status,ordered = <span class="literal">TRUE</span>);status_factor</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/15.png?raw=true" alt="d"></p>
+<p>如果我们对于这样的默认分配不满意，我们可以按照自己指定的规则进行数值分配。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">status_factor1 &lt;- factor(status, ordered = <span class="literal">TRUE</span>, </span><br><span class="line">                         levels = c(<span class="string">"poor"</span>,<span class="string">"good"</span>,<span class="string">"excellent"</span>))</span><br><span class="line">status_factor1</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/16.png?raw=true" alt="d"></p>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>列表应该是R的数据类型中最复杂的一种。一般来说，列表就是一些对象或成分的有序集合。列表允许你整合若干（可能无关）对象到单个对象名下。例如某个列表中可能是若干向量、矩阵、数据框，甚至其他列表的组合。我们可以用函数list()进行创建</p>
+<p><em>mylist &lt;- list(object1, object2, …)</em></p>
+<p>我们甚至还可以对每个对象进行命名。</p>
+<p><em>mylist &lt;- list(name1=object1, name2=object2, …)</em></p>
+<p>你可以尝试以下代码来理解列表。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g &lt;- <span class="string">"My First List"</span></span><br><span class="line">h &lt;- c(<span class="number">25</span>,<span class="number">26</span>,<span class="number">18</span>,<span class="number">39</span>)</span><br><span class="line">j &lt;- matrix(<span class="number">1</span>:<span class="number">10</span>, nrow = <span class="number">5</span>)</span><br><span class="line">k &lt;- c(<span class="string">"one"</span>,<span class="string">"two"</span>,<span class="string">"three"</span>)</span><br><span class="line">mylist &lt;- list(title=g, ages=h,j,k)</span><br><span class="line">mylist</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/17.png?raw=true" alt="d"></p>
+<p>我们对列表中的头两个对象命名为了 title, ages，剩余的我们就没有命名，程序将其按照次序自动编号为了[[3]]和[[4]]。</p>
+<p>在我没有学习回归分析的时候，我一直不知道列表有什么作用。直到我开始学习回归分析，我才发现分析结果就是一个列表类型的数据。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit &lt;- lm(mpg~wt+hp+wt:hp,data=mtcars)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/18.png?raw=true" alt="d"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/zhangzekun/tags/R/" rel="tag"># R</a>
+          
+            <a href="/zhangzekun/tags/fundamental/" rel="tag"># fundamental</a>
+          
+            <a href="/zhangzekun/tags/data-structure/" rel="tag"># data structure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zhangzekun/2019/03/10/ggplot2-基础语法/" rel="next" title="ggplot2 基础语法">
+                <i class="fa fa-chevron-left"></i> ggplot2 基础语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/zhangzekun/2019/03/10/我是不是买了一本盗版的《管理学》？/" rel="prev" title="我是不是买了一本盗版的《管理学》？">
+                我是不是买了一本盗版的《管理学》？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true" alt="Zhang Zekun">
+            
+              <p class="site-author-name" itemprop="name">Zhang Zekun</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/zhangzekun/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/zhangzekun/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/zhangzekun/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/scuzhangzekun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="zhangzekun_2019@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#向量"><span class="nav-number">1.</span> <span class="nav-text">向量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵"><span class="nav-number">2.</span> <span class="nav-text">矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建矩阵"><span class="nav-number">2.1.</span> <span class="nav-text">创建矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵下标的使用"><span class="nav-number">2.2.</span> <span class="nav-text">矩阵下标的使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">3.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建数组"><span class="nav-number">3.1.</span> <span class="nav-text">创建数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组下标的使用"><span class="nav-number">3.2.</span> <span class="nav-text">数组下标的使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据框"><span class="nav-number">4.</span> <span class="nav-text">数据框</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据框的创建"><span class="nav-number">4.1.</span> <span class="nav-text">数据框的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据框和矩阵最明显的区别"><span class="nav-number">4.2.</span> <span class="nav-text">数据框和矩阵最明显的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据框元素的选择"><span class="nav-number">4.3.</span> <span class="nav-text">数据框元素的选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按照列名称来选择"><span class="nav-number">4.3.1.</span> <span class="nav-text">按照列名称来选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attach和detach函数以及with"><span class="nav-number">4.3.2.</span> <span class="nav-text">attach和detach函数以及with</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#attch和detach"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">attch和detach</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#with"><span class="nav-number">4.3.2.2.</span> <span class="nav-text">with</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按照列序号选择"><span class="nav-number">4.3.3.</span> <span class="nav-text">按照列序号选择</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#因子"><span class="nav-number">5.</span> <span class="nav-text">因子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表"><span class="nav-number">6.</span> <span class="nav-text">列表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Zekun</span>
+</div>
+
+
+
+<span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span>人次
+ </span>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<span id="busuanzi_container_site_pv">
+总访问量:<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+<span class="post-meta-divider">|</span>
+
+
+<div class="theme-info">
+<div class="powered-by"></div>
+<span class="post-count">博客全站共9.2k字</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/zhangzekun/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/zhangzekun/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/zhangzekun/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/zhangzekun/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
