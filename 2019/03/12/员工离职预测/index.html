@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/zhangzekun/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/zhangzekun/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/zhangzekun/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/zhangzekun/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/zhangzekun/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/zhangzekun/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/zhangzekun/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="R,report,data mining,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="分析背景这个数据集来自于kaggle，分析背景是一些大公司希望知道为什么哪些优秀的和最具资历的员工会突然离开公司，同时也想预测哪些具有价值的员工将会离开。 加载包123456789library(plyr)          # Rmisc的关联包,若同时需要加载dplyr包，必须先加载plyr包library(dplyr)         # filter()library(ggplot2)">
+<meta name="keywords" content="R,report,data mining">
+<meta property="og:type" content="article">
+<meta property="og:title" content="员工离职预测">
+<meta property="og:url" content="https://scuzhangzekun.github.io/2019/03/12/员工离职预测/index.html">
+<meta property="og:site_name" content="Zekun&#39;s Blog">
+<meta property="og:description" content="分析背景这个数据集来自于kaggle，分析背景是一些大公司希望知道为什么哪些优秀的和最具资历的员工会突然离开公司，同时也想预测哪些具有价值的员工将会离开。 加载包123456789library(plyr)          # Rmisc的关联包,若同时需要加载dplyr包，必须先加载plyr包library(dplyr)         # filter()library(ggplot2)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/1.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/2.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/3.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/box_mon.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/box_time.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/4pic.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/bar_pro.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/bar_5years.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/bar_salary.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/barpro_bar5years_barsalary.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/p_rpart.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/p_nb.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/data_end.png?raw=true">
+<meta property="og:updated_time" content="2019-03-12T15:30:00.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="员工离职预测">
+<meta name="twitter:description" content="分析背景这个数据集来自于kaggle，分析背景是一些大公司希望知道为什么哪些优秀的和最具资历的员工会突然离开公司，同时也想预测哪些具有价值的员工将会离开。 加载包123456789library(plyr)          # Rmisc的关联包,若同时需要加载dplyr包，必须先加载plyr包library(dplyr)         # filter()library(ggplot2)">
+<meta name="twitter:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/1.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zhangzekun/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scuzhangzekun.github.io/2019/03/12/员工离职预测/">
+
+
+
+
+
+  <title>员工离职预测 | Zekun's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/zhangzekun/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zekun's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/zhangzekun/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/zhangzekun/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/zhangzekun/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标&emsp;&emsp;签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/zhangzekun/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/zhangzekun/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/03/12/员工离职预测/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Zekun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zekun's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">员工离职预测</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-12T22:36:24+08:00">
+                2019-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/zhangzekun/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/zhangzekun/2019/03/12/员工离职预测/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/zhangzekun/2019/03/12/员工离职预测/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="分析背景"><a href="#分析背景" class="headerlink" title="分析背景"></a>分析背景</h1><p>这个数据集来自于kaggle，分析背景是一些大公司希望知道为什么哪些优秀的和最具资历的员工会突然离开公司，同时也想预测哪些具有价值的员工将会离开。</p>
+<h1 id="加载包"><a href="#加载包" class="headerlink" title="加载包"></a>加载包</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(plyr)          <span class="comment"># Rmisc的关联包,若同时需要加载dplyr包，必须先加载plyr包</span></span><br><span class="line"><span class="keyword">library</span>(dplyr)         <span class="comment"># filter()</span></span><br><span class="line"><span class="keyword">library</span>(ggplot2)       <span class="comment"># ggplot()             </span></span><br><span class="line"><span class="keyword">library</span>(DT)            <span class="comment"># datatable()           建立交互式数据表</span></span><br><span class="line"><span class="keyword">library</span>(caret)         <span class="comment"># createDataPartition() 分层抽样函数</span></span><br><span class="line"><span class="keyword">library</span>(rpart)         <span class="comment"># rpart()</span></span><br><span class="line"><span class="keyword">library</span>(e1071)         <span class="comment"># naiveBayes()</span></span><br><span class="line"><span class="keyword">library</span>(pROC)          <span class="comment"># roc()</span></span><br><span class="line"><span class="keyword">library</span>(Rmisc)         <span class="comment"># multiplot()           分割绘图区域</span></span><br></pre></td></tr></table></figure>
+<h1 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hr &lt;- read.csv(<span class="string">"D:/HR_comma_sep.csv"</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="描述性分析"><a href="#描述性分析" class="headerlink" title="描述性分析"></a>描述性分析</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str(hr)      <span class="comment"># 查看数据的基本数据结构</span></span><br><span class="line">summary(hr)  <span class="comment"># 计算数据的主要描述统计量</span></span><br><span class="line"><span class="comment"># 后续的个别模型需要目标变量必须为因子型，我们将其转换为因子型</span></span><br><span class="line">hr$left &lt;- factor(hr$left, levels = c(<span class="string">'0'</span>, <span class="string">'1'</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/1.png?raw=true" alt="描述性分析"></p>
+<a id="more"></a>
+<h1 id="探索员工对公司满意度、绩效评估和月均工作时长与是否离职的关系"><a href="#探索员工对公司满意度、绩效评估和月均工作时长与是否离职的关系" class="headerlink" title="探索员工对公司满意度、绩效评估和月均工作时长与是否离职的关系"></a>探索员工对公司满意度、绩效评估和月均工作时长与是否离职的关系</h1><h2 id="绘制对公司满意度与是否离职的箱线图"><a href="#绘制对公司满意度与是否离职的箱线图" class="headerlink" title="绘制对公司满意度与是否离职的箱线图"></a>绘制对公司满意度与是否离职的箱线图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">box_sat &lt;- ggplot(hr, aes(x = left, y = satisfaction_level, fill = left)) +</span><br><span class="line">            geom_boxplot() + </span><br><span class="line">            theme_bw() +  <span class="comment"># 一种ggplot的主题</span></span><br><span class="line">            labs(x = <span class="string">'left'</span>, y = <span class="string">'satisfaction_level'</span>) <span class="comment"># 设置横纵坐标标签</span></span><br><span class="line">box_sat</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/2.png?raw=true" alt="满意度与离职"></p>
+<h2 id="绘制绩效评估与是否离职的箱线图"><a href="#绘制绩效评估与是否离职的箱线图" class="headerlink" title="绘制绩效评估与是否离职的箱线图"></a>绘制绩效评估与是否离职的箱线图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">box_eva &lt;- ggplot(hr, aes(x = left, y = last_evaluation, fill = left)) + </span><br><span class="line">             geom_boxplot() +</span><br><span class="line">             theme_bw() + </span><br><span class="line">             labs(x = <span class="string">'left'</span>, y = <span class="string">'last_evaluation'</span>)</span><br><span class="line">box_eva</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/3.png?raw=true" alt="绩效评估与离职"></p>
+<h2 id="绘制平均月工作时长与是否离职的箱线图"><a href="#绘制平均月工作时长与是否离职的箱线图" class="headerlink" title="绘制平均月工作时长与是否离职的箱线图"></a>绘制平均月工作时长与是否离职的箱线图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">box_mon &lt;- ggplot(hr, aes(x = left, y = average_montly_hours, fill = left)) + </span><br><span class="line">             geom_boxplot() + </span><br><span class="line">             theme_bw() + </span><br><span class="line">             labs(x = <span class="string">'left'</span>, y = <span class="string">'average_montly_hours'</span>)</span><br><span class="line">box_mon</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/box_mon.png?raw=true" alt="月工作时长与离职"></p>
+<h2 id="绘制员工在公司工作年限与是否离职的箱线图"><a href="#绘制员工在公司工作年限与是否离职的箱线图" class="headerlink" title="绘制员工在公司工作年限与是否离职的箱线图"></a>绘制员工在公司工作年限与是否离职的箱线图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">box_time &lt;- ggplot(hr, aes(x = left, y = time_spend_company, fill = left)) + </span><br><span class="line">  geom_boxplot() + </span><br><span class="line">  theme_bw() + </span><br><span class="line">  labs(x = <span class="string">'left'</span>, y = <span class="string">'time_spend_company'</span>)</span><br><span class="line">box_time</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/box_time.png?raw=true" alt="工作年限与离职"></p>
+<h2 id="合并这些图形在一个绘图区域，cols-2的意思就是排版为一行二列"><a href="#合并这些图形在一个绘图区域，cols-2的意思就是排版为一行二列" class="headerlink" title="合并这些图形在一个绘图区域，cols = 2的意思就是排版为一行二列"></a>合并这些图形在一个绘图区域，cols = 2的意思就是排版为一行二列</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multiplot(box_sat, box_eva, box_mon, box_time, cols = <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/4pic.png?raw=true" alt="合并箱线图"></p>
+<h1 id="探索参与项目个数、五年内有没有升职和薪资与离职的关系"><a href="#探索参与项目个数、五年内有没有升职和薪资与离职的关系" class="headerlink" title="探索参与项目个数、五年内有没有升职和薪资与离职的关系"></a>探索参与项目个数、五年内有没有升职和薪资与离职的关系</h1><h2 id="绘制参与项目个数条形图时需要把此变量转换为因子型"><a href="#绘制参与项目个数条形图时需要把此变量转换为因子型" class="headerlink" title="绘制参与项目个数条形图时需要把此变量转换为因子型"></a>绘制参与项目个数条形图时需要把此变量转换为因子型</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hr$number_project &lt;- factor(hr$number_project,</span><br><span class="line">                            levels = c(<span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="绘制参与项目个数条形图时需要把此变量转换为因子型-1"><a href="#绘制参与项目个数条形图时需要把此变量转换为因子型-1" class="headerlink" title="绘制参与项目个数条形图时需要把此变量转换为因子型"></a>绘制参与项目个数条形图时需要把此变量转换为因子型</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bar_pro &lt;- ggplot(hr, aes(x = number_project, fill = left)) +</span><br><span class="line">             geom_bar(position = <span class="string">'fill'</span>) + <span class="comment"># position = 'fill'即绘制百分比堆积条形图</span></span><br><span class="line">             theme_bw() + </span><br><span class="line">             labs(x = <span class="string">'left'</span>, y = <span class="string">'number_project'</span>)</span><br><span class="line">bar_pro</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/bar_pro.png?raw=true" alt="项目个数条形图"></p>
+<h2 id="绘制5年内是否升职与是否离职的百分比堆积条形图"><a href="#绘制5年内是否升职与是否离职的百分比堆积条形图" class="headerlink" title="绘制5年内是否升职与是否离职的百分比堆积条形图"></a>绘制5年内是否升职与是否离职的百分比堆积条形图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bar_5years &lt;- ggplot(hr, aes(x = as.factor(promotion_last_5years), fill = left)) +</span><br><span class="line">                geom_bar(position = <span class="string">'fill'</span>) + </span><br><span class="line">                theme_bw() + </span><br><span class="line">                labs(x = <span class="string">'left'</span>, y = <span class="string">'promotion_last_5years'</span>)</span><br><span class="line">bar_5years</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/bar_5years.png?raw=true" alt="5年内是否升职与离职"></p>
+<h2 id="绘制薪资与是否离职的百分比堆积条形图"><a href="#绘制薪资与是否离职的百分比堆积条形图" class="headerlink" title="绘制薪资与是否离职的百分比堆积条形图"></a>绘制薪资与是否离职的百分比堆积条形图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bar_salary &lt;- ggplot(hr, aes(x = salary, fill = left)) +</span><br><span class="line">                geom_bar(position = <span class="string">'fill'</span>) + </span><br><span class="line">                theme_bw() + </span><br><span class="line">                labs(x = <span class="string">'left'</span>, y = <span class="string">'salary'</span>)</span><br><span class="line">bar_salary</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/bar_salary.png?raw=true" alt="薪资待遇与离职"></p>
+<h2 id="合并这些图形在一个绘图区域，cols-3的意思就是排版为一行三列"><a href="#合并这些图形在一个绘图区域，cols-3的意思就是排版为一行三列" class="headerlink" title="合并这些图形在一个绘图区域，cols = 3的意思就是排版为一行三列"></a>合并这些图形在一个绘图区域，cols = 3的意思就是排版为一行三列</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multiplot(bar_pro, bar_5years, bar_salary, cols = <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/barpro_bar5years_barsalary.png?raw=true" alt="合并条形图"></p>
+<h1 id="提取优秀员工"><a href="#提取优秀员工" class="headerlink" title="提取优秀员工"></a>提取优秀员工</h1><h2 id="filter-用来筛选符合条件的样本"><a href="#filter-用来筛选符合条件的样本" class="headerlink" title="filter()用来筛选符合条件的样本"></a>filter()用来筛选符合条件的样本</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hr_model &lt;- filter(hr, last_evaluation &gt;= <span class="number">0.70</span> | time_spend_company &gt;= <span class="number">4</span></span><br><span class="line">                   | number_project &gt; <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="自定义交叉验证方法"><a href="#自定义交叉验证方法" class="headerlink" title="自定义交叉验证方法"></a>自定义交叉验证方法</h1><p>设置5折交叉验证 method = ‘cv’是设置交叉验证方法，number = 5意味着是5折交叉验证.<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_control &lt;- trainControl(method = <span class="string">'cv'</span>, number = <span class="number">5</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="分层抽样"><a href="#分层抽样" class="headerlink" title="分层抽样"></a>分层抽样</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">1234</span>) <span class="comment"># 设置随机种子，为了使每次抽样结果一致</span></span><br></pre></td></tr></table></figure>
+<p>根据数据的因变量进行7:3的分层抽样，返回行索引向量 p = 0.7就意味着按照7:3进行抽样，list=F即不返回列表，返回向量。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index &lt;- createDataPartition(hr_model$left, p = <span class="number">0.7</span>, list = <span class="literal">F</span>)</span><br></pre></td></tr></table></figure>
+<p>提取数据中的index所对应行索引的数据作为训练集,其余的作为测试集.<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">traindata &lt;- hr_model[index, ]</span><br><span class="line">testdata &lt;- hr_model[-index, ]</span><br></pre></td></tr></table></figure></p>
+<h1 id="回归树"><a href="#回归树" class="headerlink" title="回归树"></a>回归树</h1><p>使用caret包中的trian函数对训练集使用5折交叉的方法建立决策树模型。left ~.的意思是根据因变量与所有自变量建模；trCintrol是控制使用那种方法进行建模，methon就是设置使用哪种算法。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpartmodel &lt;- train(left ~ ., data = traindata, </span><br><span class="line">                    trControl = train_control, method = <span class="string">'rpart'</span>)</span><br></pre></td></tr></table></figure>
+<p>利用rpartmodel模型对测试集进行预测，（[-7]的意思就是剔除测试集的因变量这一列）</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pred_rpart &lt;- predict(rpartmodel, testdata[-<span class="number">7</span>])</span><br></pre></td></tr></table></figure>
+<p>建立混淆矩阵，positive=‘1’设定我们的正例为“1”.<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">con_rpart &lt;- table(pred_rpart, testdata$left)</span><br><span class="line">con_rpart</span><br></pre></td></tr></table></figure></p>
+<h1 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nbmodel &lt;- train(left ~ ., data = traindata,</span><br><span class="line">                    trControl = train_control, method = <span class="string">'nb'</span>)</span><br><span class="line"></span><br><span class="line">pred_nb &lt;- predict(nbmodel, testdata[-<span class="number">7</span>])</span><br><span class="line"></span><br><span class="line">con_nb &lt;- table(pred_nb, testdata$left)</span><br><span class="line">con_nb</span><br></pre></td></tr></table></figure>
+<h1 id="使用ROC比选模型"><a href="#使用ROC比选模型" class="headerlink" title="使用ROC比选模型"></a>使用ROC比选模型</h1><blockquote>
+<p><strong>注意</strong>：使用roc函数时，预测的值必须是数值型。</p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pred_rpart &lt;- as.numeric(as.character(pred_rpart))</span><br><span class="line">pred_nb &lt;- as.numeric(as.character(pred_nb))</span><br><span class="line">roc_rpart &lt;- roc(testdata$left, pred_rpart) <span class="comment"># 获取后续画图时使用的信息</span></span><br></pre></td></tr></table></figure>
+<h2 id="假正例率-（1-Specififity-真反例率-）"><a href="#假正例率-（1-Specififity-真反例率-）" class="headerlink" title="假正例率:（1-Specififity[真反例率]）"></a>假正例率:（1-Specififity[真反例率]）</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Specificity &lt;- roc_rpart$specificities      <span class="comment"># 为后续的横纵坐标轴奠基，真反例率</span></span><br><span class="line">Sensitivity &lt;- roc_rpart$sensitivities      <span class="comment"># 查全率 : sensitivities,也是真正例率</span></span><br></pre></td></tr></table></figure>
+<h2 id="绘制ROC曲线"><a href="#绘制ROC曲线" class="headerlink" title="绘制ROC曲线"></a>绘制ROC曲线</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">p_rpart &lt;- ggplot(data = <span class="literal">NULL</span>, aes(x = <span class="number">1</span>- Specificity, y = Sensitivity)) + </span><br><span class="line">             geom_line(colour = <span class="string">'red'</span>) + <span class="comment"># 绘制ROC曲线</span></span><br><span class="line">             geom_abline() +             <span class="comment"># 绘制对角线</span></span><br><span class="line">             annotate(<span class="string">'text'</span>, x = <span class="number">0.4</span>, y = <span class="number">0.5</span>, label = paste(<span class="string">'AUC='</span>, <span class="comment">#text是声明图层上添加文本注释</span></span><br><span class="line">            <span class="comment">#‘3’是round函数里面的参数,保留三位小数                                              </span></span><br><span class="line">             round(roc_rpart$auc, <span class="number">3</span>))) + theme_bw() + <span class="comment"># 在图中（0.4,0.5）处添加AUC值</span></span><br><span class="line">             labs(x = <span class="string">'1 - Specificity'</span>, y = <span class="string">'Sensitivities'</span>) <span class="comment"># 设置横纵坐标轴标签</span></span><br><span class="line">p_rpart</span><br><span class="line"></span><br><span class="line">roc_nb &lt;- roc(testdata$left, pred_nb)</span><br><span class="line">Specificity &lt;- roc_nb$specificities</span><br><span class="line">Sensitivity &lt;- roc_nb$sensitivities</span><br><span class="line">p_nb &lt;- ggplot(data = <span class="literal">NULL</span>, aes(x = <span class="number">1</span>- Specificity, y = Sensitivity)) + </span><br><span class="line">          geom_line(colour = <span class="string">'red'</span>) + geom_abline() + </span><br><span class="line">          annotate(<span class="string">'text'</span>, x = <span class="number">0.4</span>, y = <span class="number">0.5</span>, label = paste(<span class="string">'AUC='</span>, </span><br><span class="line">          round(roc_nb$auc, <span class="number">3</span>))) + theme_bw() + </span><br><span class="line">          labs(x = <span class="string">'1 - Specificity'</span>, y = <span class="string">'Sensitivities'</span>)</span><br><span class="line">p_nb</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/p_rpart.png?raw=true" alt="回归树ROC"></p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/p_nb.png?raw=true" alt="朴素贝叶斯ROC"></p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>使用回归树模型预测分类的概率，type=‘prob’设置预测结果为离职的概率和不离职的概率。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pred_end &lt;- predict(rpartmodel, testdata[-<span class="number">7</span>], type = <span class="string">'prob'</span>)</span><br></pre></td></tr></table></figure>
+<p>合并预测结果和预测概率结果.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_end &lt;- cbind(round(pred_end, <span class="number">3</span>), pred_rpart)</span><br></pre></td></tr></table></figure>
+<p>为预测结果表重命名.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">names(data_end) &lt;- c(<span class="string">'pred.0'</span>, <span class="string">'pred.1'</span>, <span class="string">'pred'</span>)</span><br></pre></td></tr></table></figure>
+<p>生成一个交互式数据表.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datatable(data_end)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E9%A2%84%E6%B5%8B/data_end.png?raw=true" alt="data_end"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/zhangzekun/tags/R/" rel="tag"># R</a>
+          
+            <a href="/zhangzekun/tags/report/" rel="tag"># report</a>
+          
+            <a href="/zhangzekun/tags/data-mining/" rel="tag"># data mining</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zhangzekun/2019/03/12/为什么会出现城市？/" rel="next" title="为什么会出现城市？">
+                <i class="fa fa-chevron-left"></i> 为什么会出现城市？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true" alt="Zhang Zekun">
+            
+              <p class="site-author-name" itemprop="name">Zhang Zekun</p>
+              <p class="site-description motion-element" itemprop="description">Do not pray for easy life. Pray to be stronger men.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/zhangzekun/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/zhangzekun/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/zhangzekun/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/scuzhangzekun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="zhangzekun_2019@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分析背景"><span class="nav-number">1.</span> <span class="nav-text">分析背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加载包"><span class="nav-number">2.</span> <span class="nav-text">加载包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#导入数据"><span class="nav-number">3.</span> <span class="nav-text">导入数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#描述性分析"><span class="nav-number">4.</span> <span class="nav-text">描述性分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#探索员工对公司满意度、绩效评估和月均工作时长与是否离职的关系"><span class="nav-number">5.</span> <span class="nav-text">探索员工对公司满意度、绩效评估和月均工作时长与是否离职的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制对公司满意度与是否离职的箱线图"><span class="nav-number">5.1.</span> <span class="nav-text">绘制对公司满意度与是否离职的箱线图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制绩效评估与是否离职的箱线图"><span class="nav-number">5.2.</span> <span class="nav-text">绘制绩效评估与是否离职的箱线图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制平均月工作时长与是否离职的箱线图"><span class="nav-number">5.3.</span> <span class="nav-text">绘制平均月工作时长与是否离职的箱线图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制员工在公司工作年限与是否离职的箱线图"><span class="nav-number">5.4.</span> <span class="nav-text">绘制员工在公司工作年限与是否离职的箱线图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并这些图形在一个绘图区域，cols-2的意思就是排版为一行二列"><span class="nav-number">5.5.</span> <span class="nav-text">合并这些图形在一个绘图区域，cols = 2的意思就是排版为一行二列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#探索参与项目个数、五年内有没有升职和薪资与离职的关系"><span class="nav-number">6.</span> <span class="nav-text">探索参与项目个数、五年内有没有升职和薪资与离职的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制参与项目个数条形图时需要把此变量转换为因子型"><span class="nav-number">6.1.</span> <span class="nav-text">绘制参与项目个数条形图时需要把此变量转换为因子型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制参与项目个数条形图时需要把此变量转换为因子型-1"><span class="nav-number">6.2.</span> <span class="nav-text">绘制参与项目个数条形图时需要把此变量转换为因子型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制5年内是否升职与是否离职的百分比堆积条形图"><span class="nav-number">6.3.</span> <span class="nav-text">绘制5年内是否升职与是否离职的百分比堆积条形图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制薪资与是否离职的百分比堆积条形图"><span class="nav-number">6.4.</span> <span class="nav-text">绘制薪资与是否离职的百分比堆积条形图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并这些图形在一个绘图区域，cols-3的意思就是排版为一行三列"><span class="nav-number">6.5.</span> <span class="nav-text">合并这些图形在一个绘图区域，cols = 3的意思就是排版为一行三列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提取优秀员工"><span class="nav-number">7.</span> <span class="nav-text">提取优秀员工</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#filter-用来筛选符合条件的样本"><span class="nav-number">7.1.</span> <span class="nav-text">filter()用来筛选符合条件的样本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义交叉验证方法"><span class="nav-number">8.</span> <span class="nav-text">自定义交叉验证方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分层抽样"><span class="nav-number">9.</span> <span class="nav-text">分层抽样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回归树"><span class="nav-number">10.</span> <span class="nav-text">回归树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#朴素贝叶斯"><span class="nav-number">11.</span> <span class="nav-text">朴素贝叶斯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ROC比选模型"><span class="nav-number">12.</span> <span class="nav-text">使用ROC比选模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#假正例率-（1-Specififity-真反例率-）"><span class="nav-number">12.1.</span> <span class="nav-text">假正例率:（1-Specififity[真反例率]）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制ROC曲线"><span class="nav-number">12.2.</span> <span class="nav-text">绘制ROC曲线</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用"><span class="nav-number">13.</span> <span class="nav-text">应用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Zekun</span>
+</div>
+
+
+
+<span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span>人次
+ </span>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<span id="busuanzi_container_site_pv">
+总访问量:<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+<span class="post-meta-divider">|</span>
+
+
+<div class="theme-info">
+<div class="powered-by"></div>
+<span class="post-count">博客全站共15.3k字</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/zhangzekun/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/zhangzekun/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/zhangzekun/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/zhangzekun/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'mNDsdJBWKd9gRRIcNTquHJir-gzGzoHsz',
+        appKey: '3KGr93fcHaIr5HizTOYeHAM8',
+        placeholder: '~\(>_<)/~ 少侠，留个言吧',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
