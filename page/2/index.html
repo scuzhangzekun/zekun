@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="Do not pray for easy life. Pray to be stronger men.">
+<meta name="description" content="A student majored in Land Resource Management.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Zekun&#39;s Blog">
 <meta property="og:url" content="https://scuzhangzekun.github.io/page/2/index.html">
 <meta property="og:site_name" content="Zekun&#39;s Blog">
-<meta property="og:description" content="Do not pray for easy life. Pray to be stronger men.">
+<meta property="og:description" content="A student majored in Land Resource Management.">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zekun&#39;s Blog">
-<meta name="twitter:description" content="Do not pray for easy life. Pray to be stronger men.">
+<meta name="twitter:description" content="A student majored in Land Resource Management.">
 
 
 
@@ -160,7 +160,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">Do not pray for easy life. Pray to be stronger men.</p>
       
   </div>
 
@@ -248,6 +248,211 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/03/10/R语言数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Zekun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zekun's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/zhangzekun/2019/03/10/R语言数据结构/" itemprop="url">R语言数据结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T08:40:25+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/zhangzekun/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/zhangzekun/2019/03/10/R语言数据结构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/zhangzekun/2019/03/10/R语言数据结构/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在基础的R环境下，数据结构主要分为了以下几类：</p>
+<ul>
+<li>向量</li>
+<li>矩阵</li>
+<li>数组</li>
+<li>数据框</li>
+<li>因子</li>
+<li>列表</li>
+</ul>
+<h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><p>向量是用于存储数值型、字符型或逻辑型数据的一维数组。我们可以通过执行c()函数来创建一个向量。你可以尝试执行以下代码来查看结果。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a &lt;- c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,-<span class="number">3</span>,<span class="number">5</span>)</span><br><span class="line">b &lt;- c(<span class="string">"R"</span>,<span class="string">"Python"</span>,<span class="string">"C"</span>,<span class="string">"C++"</span>)</span><br><span class="line">c &lt;- c(<span class="literal">TRUE</span>, <span class="literal">FALSE</span>,<span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>值得注意的是，一个向量中存储的数据必须类型一致，不能出现混杂，否则就会报错。</p>
+</blockquote>
+<p>我们应该灵活运用向量，这样就能提高数据分析的效率。例如我们希望取出刚才案例中的a向量第3,4,6,7位的数，如果是一个一个取那么效率将会大大降低，我们可以选择向量来进行提取。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[c(<span class="number">3</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>)]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>a[c(3,4,6,7)]<br>[1] 3 4 -3 5</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/zhangzekun/2019/03/10/R语言数据结构/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -486,7 +691,7 @@
               <img class="site-author-image" itemprop="image" src="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true" alt="Zhang Zekun">
             
               <p class="site-author-name" itemprop="name">Zhang Zekun</p>
-              <p class="site-description motion-element" itemprop="description">Do not pray for easy life. Pray to be stronger men.</p>
+              <p class="site-description motion-element" itemprop="description">A student majored in Land Resource Management.</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -496,7 +701,7 @@
               
                 <a href="/zhangzekun/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -507,7 +712,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/zhangzekun/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -518,7 +723,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/zhangzekun/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -599,7 +804,7 @@
 
 <div class="theme-info">
 <div class="powered-by"></div>
-<span class="post-count">博客全站共15.3k字</span>
+<span class="post-count">博客全站共17.9k字</span>
 </div>
 
 
@@ -646,8 +851,6 @@
   
 
 
-  
-
 
 
 
@@ -686,11 +889,6 @@
   
   
     <script type="text/javascript" src="/zhangzekun/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/zhangzekun/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
