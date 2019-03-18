@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="1. 软件获取我的系统是Windows 10，直接到官网下载对应的 PostgreSQL 相应版本即可。 2. 管理工具主要有四种管理工具：  psql pgAdmin phpPgAdmin Adminer  psql这是一种 查询命令行 的工具，输入命令行来完成查询工作。或许像我这类的新人无法适应非图形化的界面，但是不得不说这种输入命令行的方式看起来很酷。 pgAdmin刚才说的 psql 是一">
+<meta name="description" content="1. 软件获取我的系统是Windows 10，直接到官网下载对应的 PostgreSQL 相应版本即可。 2. 管理工具主要有四种管理工具：  psql pgAdmin phpPgAdmin Adminer  psql这是一种 查询命令行 的工具，输入命令行来完成查询工作。或许像我这类的新人无法适应非图形化的界面，但是不得不说这种输入命令行的方式看起来很酷。  pgAdmin刚才说的 psql">
 <meta name="keywords" content="reading notes,fundamental,PostgreSQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PostgreSQL入门学习(一)">
+<meta property="og:title" content="PostgreSQL安装和简介">
 <meta property="og:url" content="https://scuzhangzekun.github.io/2019/03/15/PostgreSQL入门学习/index.html">
 <meta property="og:site_name" content="Zekun&#39;s Blog">
-<meta property="og:description" content="1. 软件获取我的系统是Windows 10，直接到官网下载对应的 PostgreSQL 相应版本即可。 2. 管理工具主要有四种管理工具：  psql pgAdmin phpPgAdmin Adminer  psql这是一种 查询命令行 的工具，输入命令行来完成查询工作。或许像我这类的新人无法适应非图形化的界面，但是不得不说这种输入命令行的方式看起来很酷。 pgAdmin刚才说的 psql 是一">
+<meta property="og:description" content="1. 软件获取我的系统是Windows 10，直接到官网下载对应的 PostgreSQL 相应版本即可。 2. 管理工具主要有四种管理工具：  psql pgAdmin phpPgAdmin Adminer  psql这是一种 查询命令行 的工具，输入命令行来完成查询工作。或许像我这类的新人无法适应非图形化的界面，但是不得不说这种输入命令行的方式看起来很酷。  pgAdmin刚才说的 psql">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-16T16:12:52.436Z">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/PostgreSQL/first.jpg?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/PostgreSQL/pgql.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/PostgreSQL/pgAdmin.png?raw=true">
+<meta property="og:updated_time" content="2019-03-18T06:41:30.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PostgreSQL入门学习(一)">
-<meta name="twitter:description" content="1. 软件获取我的系统是Windows 10，直接到官网下载对应的 PostgreSQL 相应版本即可。 2. 管理工具主要有四种管理工具：  psql pgAdmin phpPgAdmin Adminer  psql这是一种 查询命令行 的工具，输入命令行来完成查询工作。或许像我这类的新人无法适应非图形化的界面，但是不得不说这种输入命令行的方式看起来很酷。 pgAdmin刚才说的 psql 是一">
+<meta name="twitter:title" content="PostgreSQL安装和简介">
+<meta name="twitter:description" content="1. 软件获取我的系统是Windows 10，直接到官网下载对应的 PostgreSQL 相应版本即可。 2. 管理工具主要有四种管理工具：  psql pgAdmin phpPgAdmin Adminer  psql这是一种 查询命令行 的工具，输入命令行来完成查询工作。或许像我这类的新人无法适应非图形化的界面，但是不得不说这种输入命令行的方式看起来很酷。  pgAdmin刚才说的 psql">
+<meta name="twitter:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/PostgreSQL/first.jpg?raw=true">
 
 
 
@@ -126,7 +130,7 @@
 
 
 
-  <title>PostgreSQL入门学习(一) | Zekun's Blog</title>
+  <title>PostgreSQL安装和简介 | Zekun's Blog</title>
   
 
 
@@ -280,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PostgreSQL入门学习(一)</h1>
+          <h1 class="post-title" itemprop="name headline">PostgreSQL安装和简介</h1>
         
 
         <div class="post-meta">
@@ -393,7 +397,8 @@
       
 
       
-        <h1 id="1-软件获取"><a href="#1-软件获取" class="headerlink" title="1. 软件获取"></a>1. 软件获取</h1><p>我的系统是Windows 10，直接到官网下载对应的 <a href="https://www.postgresql.org/download/windows/" target="_blank">PostgreSQL</a> 相应版本即可。</p>
+        <p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/PostgreSQL/first.jpg?raw=true" alt="postgresql"></p>
+<h1 id="1-软件获取"><a href="#1-软件获取" class="headerlink" title="1. 软件获取"></a>1. 软件获取</h1><p>我的系统是Windows 10，直接到官网下载对应的 <a href="https://www.postgresql.org/download/windows/" target="_blank">PostgreSQL</a> 相应版本即可。</p>
 <h1 id="2-管理工具"><a href="#2-管理工具" class="headerlink" title="2. 管理工具"></a>2. 管理工具</h1><p>主要有四种管理工具：</p>
 <ul>
 <li>psql</li>
@@ -402,7 +407,9 @@
 <li>Adminer</li>
 </ul>
 <h2 id="psql"><a href="#psql" class="headerlink" title="psql"></a>psql</h2><p>这是一种 <strong>查询命令行</strong> 的工具，输入命令行来完成查询工作。或许像我这类的新人无法适应非图形化的界面，但是不得不说这种输入命令行的方式看起来很酷。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/PostgreSQL/pgql.png?raw=true" alt="pgql"></p>
 <h2 id="pgAdmin"><a href="#pgAdmin" class="headerlink" title="pgAdmin"></a>pgAdmin</h2><p>刚才说的 psql 是一种输入命令行的工具，那么 pgAdmin 就是一款图形化界面的工具，对于新手来说比较友好。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/PostgreSQL/pgAdmin.png?raw=true" alt="pgadmin"></p>
 <h2 id="phpPgAdmin"><a href="#phpPgAdmin" class="headerlink" title="phpPgAdmin"></a>phpPgAdmin</h2><p>这是一个基于 web 页面的管理工具。</p>
 <h2 id="Adminer"><a href="#Adminer" class="headerlink" title="Adminer"></a>Adminer</h2><p>整合了多种数据库的管理工具，后面暂时还不会接触到。</p>
 <a id="more"></a>
