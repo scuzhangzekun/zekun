@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/zhangzekun/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/zhangzekun/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/zhangzekun/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/zhangzekun/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/zhangzekun/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/zhangzekun/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/zhangzekun/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="R,package,translation,Not_Integrity,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="plm包简介面板数据是计量经济学中一个不断发展的领域。随着单位横断面(如家庭、公司、国家等)上所观察到的数据越来越多，以及随着时间的推移，出现了一些利用这种双维性来处理一些与经济数据有关的典型问题的估计方法，首先就是未观察到的异质性问题。 长期以来，对来自不同观测单元的数据进行时间上的观察在其他统计领域(通常称为纵向数据)很常见。在面板数据领域和其他领域，计量经济学方法在实验环境方面是独特的，因为">
+<meta name="keywords" content="R,package,translation,Not_Integrity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="plm包简介">
+<meta property="og:url" content="https://scuzhangzekun.github.io/2019/03/22/plm包简介/index.html">
+<meta property="og:site_name" content="Zekun&#39;s Blog">
+<meta property="og:description" content="plm包简介面板数据是计量经济学中一个不断发展的领域。随着单位横断面(如家庭、公司、国家等)上所观察到的数据越来越多，以及随着时间的推移，出现了一些利用这种双维性来处理一些与经济数据有关的典型问题的估计方法，首先就是未观察到的异质性问题。 长期以来，对来自不同观测单元的数据进行时间上的观察在其他统计领域(通常称为纵向数据)很常见。在面板数据领域和其他领域，计量经济学方法在实验环境方面是独特的，因为">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/2headGrunfeld.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/3headE.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/4summary_grun.fe.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/6fixed_grun.fe.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/7summary_fixef_grun.fe_dmean.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/8ercomp.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/9summary_twoways.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/10summary_Hed.png?raw=true">
+<meta property="og:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/11summary_Hed.png?raw=true">
+<meta property="og:updated_time" content="2019-03-23T09:43:34.275Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="plm包简介">
+<meta name="twitter:description" content="plm包简介面板数据是计量经济学中一个不断发展的领域。随着单位横断面(如家庭、公司、国家等)上所观察到的数据越来越多，以及随着时间的推移，出现了一些利用这种双维性来处理一些与经济数据有关的典型问题的估计方法，首先就是未观察到的异质性问题。 长期以来，对来自不同观测单元的数据进行时间上的观察在其他统计领域(通常称为纵向数据)很常见。在面板数据领域和其他领域，计量经济学方法在实验环境方面是独特的，因为">
+<meta name="twitter:image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zhangzekun/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scuzhangzekun.github.io/2019/03/22/plm包简介/">
+
+
+
+
+
+  <title>plm包简介 | Zekun's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/zhangzekun/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zekun's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Do not pray for easy life. Pray to be stronger men.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/zhangzekun/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/zhangzekun/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/zhangzekun/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标&emsp;&emsp;签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/zhangzekun/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/zhangzekun/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/03/22/plm包简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Zekun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zekun's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">plm包简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-22T12:48:33+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/zhangzekun/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/zhangzekun/2019/03/22/plm包简介/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/zhangzekun/2019/03/22/plm包简介/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="plm包简介"><a href="#plm包简介" class="headerlink" title="plm包简介"></a>plm包简介</h1><p>面板数据是计量经济学中一个不断发展的领域。随着单位横断面(如家庭、公司、国家等)上所观察到的数据越来越多，以及随着时间的推移，出现了一些利用这种双维性来处理一些与经济数据有关的典型问题的估计方法，首先就是未观察到的异质性问题。</p>
+<p>长期以来，对来自不同观测单元的数据进行时间上的观察在其他统计领域(通常称为纵向数据)很常见。在面板数据领域和其他领域，计量经济学方法在实验环境方面是独特的，因为它强调模型说明和测试，并处理与经济数据有关的特定统计问题所引起的一些问题。</p>
+<p>因此,虽然一个非常全面的软件框架(在许多其他特性)：最大似然估计线性回归模型的纵向数据,包nlme和lme4,可在R环境中使用。</p>
+<p>例如,使用随机效应估计面板模型,对于一名正在练习的计量经济学学生而言，使用它并不直观。而最大似然估计只是面板数据计量经济学的一种可能方法。此外，经济面板数据集往往是不平衡的，这一情况需要对方法进行一些调整，与nlme中的方法并不兼容。</p>
+<p>因此，需要一个“从计量经济学家的角度”进行面板数据处理的软件包，并且至少具备计量经济学家所使用的基本技术:静态线性面板数据模型的随机和固定效应估计、可变系数模型、动态模型的广义矩估计方法;以及规范和错误规范诊断的基本工具箱。</p>
+<p>此外，我们认为有必要自动化一些基本的数据管理任务，例如滞后、求和，更一般地说，对数据应用(R意义上的)函数，这些函数虽然概念简单，但在二维数据上却很麻烦，容易出错，特别是在不平衡面板的情况下。</p>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>面板数据具有特殊的结构:每一行数据对应一个特定的个体和时间段。在plm中，数据参数可以是一个普通的<code>data.frame</code>，但在本例中，必须添加一个名为<code>index</code>的参数来指示数据的结构。这可以是:</p>
+<ul>
+<li><code>NULL</code>假设前两列包含个体和时间索引，观测值按样本个体名称和时间周期排序;</li>
+<li>一个字符串，应该是单个索引的名称;</li>
+<li>长度为2的字符向量，包含单独的名字和时间索引;</li>
+<li>一个代表样本个体数量的整数(只能在按照样本个体名称排序的平衡面板的情况下使用)。</li>
+</ul>
+<p>然后在内部调用<code>pdata.frame</code>函数，该函数返回一个<code>pdata.frame</code>，这是一个具有<code>index</code>属性的<code>data.frame</code>。这个属性是一个<code>data.frame</code>，它包含样本个体名称和时间索引。样子大概就是下面这样。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png?raw=true" alt="面板数据数据结构"></p>
+<h1 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h1><h2 id="估计接口-Estimation-interface"><a href="#估计接口-Estimation-interface" class="headerlink" title="估计接口(Estimation interface)"></a>估计接口(Estimation interface)</h2><p><code>plm</code>提供各种估计功能，其中:</p>
+<ul>
+<li><code>plm</code>:基本面板模型的估计，即组内、组间和随机效应模型。利用<code>lm</code>函数对转换后的数据进行模型估计;</li>
+<li><code>pvcm</code>:变系数模型的估计;</li>
+<li><code>pgmm</code>:广义矩模型法的估计;</li>
+<li><code>pggls</code>:一般可行广义最小二乘模型的估计;</li>
+<li><code>pmg</code>:对于非均匀面板模型，均值组(MG)、降低的MG (DMG)和共同相关效应MG (CCEMG)的估计量;</li>
+<li><code>pcce</code>:有共同因素的面板数据的共同相关效应平均组(CCEMG)和合并组(CCEP)的估计量;</li>
+<li><code>pldv</code>:有限因变量的面板估计。</li>
+</ul>
+<p>这些函数的接口与<code>lm()</code>函数一致。也就是说，它们的前两个参数是公式和数据(应该是<code>data.frame</code>，并且是强制性的)。这些函数还有三个常见的参数:</p>
+<ul>
+<li><code>index</code>:这个参数使估计函数能够识别数据的结构，即个体和每次观测的时间周期;</li>
+<li><code>effect</code>:模型中要包括的效应，即个体效应、时间效应或两者兼有的效应;</li>
+<li><code>model</code>:要估计的模型的种类，大多数时候是具有固定效应的模型或具有随机效果的模型。</li>
+</ul>
+<p>这四个函数的结果存储在一个对象中，这个对象的类具有与函数相同的名称。它们都继承自类<code>panelmodel</code>。<code>panelmodel</code>对象包含:<code>coefficients</code>, <code>residuals</code>, <code>fitted.values</code>, <code>vcov</code>, <code>df.residual</code> 和 <code>call</code>,另外还提供了提取这些元素的函数。</p>
+<h2 id="测试接口-Testing-interface"><a href="#测试接口-Testing-interface" class="headerlink" title="测试接口(Testing interface)"></a>测试接口(Testing interface)</h2><p>诊断测试接口为大多数函数提供了公式和<code>panelmodel</code>方法，但也有一些例外。因此，用户可以选择测试先前估计的<code>panelmodel</code>对象中的结果，或者为了测试而重新估计它。</p>
+<p>尽管第一种策略是最有效的，但对面板模型的诊断测试主要使用来自pooling模型对象的OLS残差，这些残差的估计在计算上并不费事。</p>
+<h1 id="管理数据和公式"><a href="#管理数据和公式" class="headerlink" title="管理数据和公式"></a>管理数据和公式</h1><p>首先应该先加载包。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(<span class="string">"plm"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>使用的四个数据集分别是:阿雷拉诺和邦德(1991)使用的EmplUK、几本计量经济学书籍中使用的Grunfeld数据(Kleiber和Zeileis 2008)、Munnell(1990)使用的Produc数据以及Cornwell和Rupert(1988)使用的Wage数据。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data(<span class="string">"EmplUK"</span>, package=<span class="string">"plm"</span>)</span><br><span class="line">data(<span class="string">"Produc"</span>, package=<span class="string">"plm"</span>)</span><br><span class="line">data(<span class="string">"Grunfeld"</span>, package=<span class="string">"plm"</span>)</span><br><span class="line">data(<span class="string">"Wages"</span>, package=<span class="string">"plm"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h2><p>正如上面所观察到的，当前版本的plm能够处理常规<code>data.frame</code>，而不需要进行任何进一步的转换，前提是个体名称和时间索引位于前两列中，就像在除工资以外的所有示例数据集中一样。如果不是这样，则必须将索引可选参数传递给评估和测试函数。</p>
+<p>先来看一下<code>Grunfeld</code>数据是什么样子的。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(Grunfeld)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/2headGrunfeld.png?raw=true" alt="headGrunfeld"></p>
+<p>我们将这个数据的结构进行转换。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E &lt;- pdata.frame(EmplUK, index=c(<span class="string">"firm"</span>,<span class="string">"year"</span>), drop.index=<span class="literal">TRUE</span>, row.names=<span class="literal">TRUE</span>)</span><br><span class="line">head(E)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/3headE.png?raw=true" alt="headE"></p>
+<p><code>index</code>指定了我们个体名称和时间内容；<code>drop.index=TRUE</code>将原来的<code>data.frame</code>中的个体名称和时间剔除，保留其余数据；<code>row.names=TRUE</code>则是将<code>index</code>中的个体名称和时间拼凑为行名。</p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p><code>plm</code>包调用了<code>Formula</code>包来表达函数内的公式内容。</p>
+<h1 id="估计模型"><a href="#估计模型" class="headerlink" title="估计模型"></a>估计模型</h1><h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>一些基本的面板数据分析模型可以使用<code>plm</code>完成，他们包括以下这些模型：</p>
+<ul>
+<li>固定效应模型(fixed effects model,<code>within</code>);</li>
+<li>混合模型(pooling model,<code>pooling</code>);</li>
+<li>一阶差分模型(first-difference model,<code>fd</code>)</li>
+<li>组间模型(between model,<code>between</code>)</li>
+<li>随机效应模型(error components model,<code>random</code>)</li>
+</ul>
+<p><code>plm</code>的基本用途是表示模型公式、数据和待估计模型。例如，固定效应模型和随机效应模型分别用:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#固定效应模型回归结果</span></span><br><span class="line">grun.fe &lt;- plm(inv~value+capital, data = Grunfeld, model = <span class="string">"within"</span>)</span><br><span class="line">summary(grun.fe)</span><br><span class="line"><span class="comment">#随机效应模型回归结果</span></span><br><span class="line">grun.re &lt;- plm(inv~value+capital, data = Grunfeld, model = <span class="string">"random"</span>)</span><br><span class="line">summary(frun.re)</span><br></pre></td></tr></table></figure>
+<p>我们使用<code>summay()</code>函数来查看回归结果，具体的分析就和使用<code>lm()</code>函数是一样的。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/4summary_grun.fe.png?raw=true" alt="grun.fe"></p>
+<p>我们可以使用<code>fixef()</code>函数来提取各个个体的固定效应。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fixef(grun.fe)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/6fixed_grun.fe.png?raw=true" alt="fixef(grun.fe)"></p>
+<p><code>fixef()</code>函数返回了<code>fixef</code>类的内容，我们使用<code>summary()</code>函数来查看结果，当中返回了<code>影响值</code>、<code>标准差</code>、<code>与总体截距项的检验检验结果</code>。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/7summary_fixef_grun.fe_dmean.png?raw=true" alt="fixef(grun.fe, type = &quot;dmean&quot;)"></p>
+<p>如果我们需要使用混合模型，那么就需要使用<code>effect</code>参数来提取固定效应的内容。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grun.twfe &lt;- plm(inv~value+capital, data=Grunfeld, model=<span class="string">"within"</span>, effect=<span class="string">"twoways"</span>)</span><br><span class="line">fixef(grun.twfe, effect=<span class="string">"time"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="高级应用"><a href="#高级应用" class="headerlink" title="高级应用"></a>高级应用</h2><h3 id="随机效应估计值"><a href="#随机效应估计值" class="headerlink" title="随机效应估计值"></a>随机效应估计值</h3><p>如上所述，得到的随机效应模型是对准除均值数据(quasi-demeaned data)的线性估计。通过初步估计得到了该变换的参数。</p>
+<p>根据参数的值，可以使用此参数的四个估计值：</p>
+<ul>
+<li><code>&quot;swar&quot;</code>:来自Swamy and Arora(1972)，在<code>R</code>中是默认值；</li>
+<li><code>&quot;walhus&quot;</code>:来自Wallace and Hussain (1969)；</li>
+<li><code>&quot;amemiya&quot;</code>:来自Amemiya (1971)；</li>
+<li><code>&quot;nerlove&quot;</code>:来自Nerlove (1971)。</li>
+</ul>
+<p>例如我们使用<code>&quot;amemiya&quot;</code>估计量，形式如下：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grun.amem &lt;- plm(inv~value+capital, data=Grunfeld,</span><br><span class="line">                 model=<span class="string">"random"</span>, random.method=<span class="string">"amemiya"</span>)</span><br></pre></td></tr></table></figure>
+<p>误差分量方差的估计采用ercomp函数，ercomp函数有方法和效果参数，可以单独使用:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ercomp(inv~value+capital, data=Grunfeld, method = <span class="string">"amemiya"</span>, effect = <span class="string">"twoways"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/8ercomp.png?raw=true" alt="ercomp"></p>
+<h3 id="time和two-ways的介绍"><a href="#time和two-ways的介绍" class="headerlink" title="time和two-ways的介绍"></a><code>time</code>和<code>two-ways</code>的介绍</h3><p>plm的默认行为是引入个体的效果。使用effect参数，我们还可以引入:</p>
+<ul>
+<li>时间影响(time effects,<code>effect = &quot;time&quot;</code>)</li>
+<li>个体和时间共同影响(individual and time effects,<code>effect = &quot;twoways&quot;</code>)</li>
+</ul>
+<p>为此，我们使用<code>Grunfeld</code>数据来进行演示：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grun.tways &lt;- plm(inv~value+capital, data = Grunfeld, effect = <span class="string">"twoways"</span>,</span><br><span class="line">                  model = <span class="string">"random"</span>, random.method = <span class="string">"amemiya"</span>)</span><br><span class="line">summary(grun.tways)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/9summary_twoways.png?raw=true" alt="twoways"></p>
+<p>在打印结果摘要的“effects”部分，打印了误差项的三个元素的方差和转换中使用的三个参数。</p>
+<h3 id="非平衡面板数据"><a href="#非平衡面板数据" class="headerlink" title="非平衡面板数据"></a>非平衡面板数据</h3><p>plm的大部分功能都是为非平衡面板模型实现的，但有一个明显的例外:</p>
+<ul>
+<li>there is no random two-ways effect model for random.method = “nerlove”</li>
+</ul>
+<p>下面的例子是使用Harrison和Rubinfeld(1978)的数据，是用来估计特征价格(hedonic housing prices)函数。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data(<span class="string">"Hedonic"</span>, package = <span class="string">"plm"</span>)</span><br><span class="line">Hed &lt;- plm(mv~crim+zn+indus+chas+nox+rm+age+dis+rad+tax+ptratio+blacks+lstat,</span><br><span class="line">           data = Hedonic, model = <span class="string">"random"</span>, index = <span class="string">"townid"</span>)</span><br><span class="line">summary(Hed)</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/10summary_Hed.png?raw=true" alt="SummaryHed"></p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/plm%E5%8C%85%E7%AE%80%E4%BB%8B/11summary_Hed.png?raw=true" alt="SummaryHed"></p>
+<p>面板数据集或估计模型中使用的数据的不平衡性的度量由函数<code>punbalancedness</code>提供。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">punbalancedness(Hed)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="gamma-nu"><a href="#gamma-nu" class="headerlink" title="gamma        nu"></a>gamma        nu</h2><h2 id="0-4715336-0-5188292"><a href="#0-4715336-0-5188292" class="headerlink" title="0.4715336 0.5188292"></a>0.4715336 0.5188292</h2></blockquote>
+<h1 id="检验"><a href="#检验" class="headerlink" title="检验"></a>检验</h1><p>正如在第2节中概述的，面板模型中的规范测试主要涉及到对可汇集性、个体或未观察到的时间效应以及这些效应与回归量之间的相关性的测试(Hausman-type tests)。对于其他常见的诊断检查，我们提供了一套序列相关测试，但没有涉及异方差测试的问题。相反，我们提供了异方差鲁棒协方差估计器，将在6.7小节中描述。</p>
+<h2 id="混合性检验-Tests-of-poolability"><a href="#混合性检验-Tests-of-poolability" class="headerlink" title="混合性检验(Tests of poolability)"></a>混合性检验(Tests of poolability)</h2><p><code>pooltest</code>检验假设，即相同的系数适用于每个个体。这是一个标准的<code>F检验</code>，它是基于对整个样本的模型和基于对每个个体的方程估计的模型的比较。</p>
+<p><code>pooltest</code>的第一个参数是<code>plm</code>对象。第二个参数是使用<code>model=&quot;within&quot;</code>获得的<code>pvcm</code>对象。如果第一个参数是<code>pooling</code>模型，则测试适用于所有系数(包括截距项)，如果它是模型中的，则假设不同的截距项。</p>
+<p>为了检验Grunfeld例子中的所有系数(不包括截距)都相等的假设，我们使用:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">znp &lt;- pvcm(inv~value+capital, data=Grunfeld, model=<span class="string">"within"</span>)</span><br><span class="line">zplm &lt;- plm(inv~value+capital, data=Grunfeld, model=<span class="string">"within"</span>)</span><br><span class="line">pooltest(zplm, znp)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>F statistic<br>data:  inv ~ value + capital<br>F = 5.7805, df1 = 18, df2 = 170, p-value = 1.219e-10<br>alternative hypothesis: unstability   </p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/zhangzekun/tags/R/" rel="tag"># R</a>
+          
+            <a href="/zhangzekun/tags/package/" rel="tag"># package</a>
+          
+            <a href="/zhangzekun/tags/translation/" rel="tag"># translation</a>
+          
+            <a href="/zhangzekun/tags/Not-Integrity/" rel="tag"># Not_Integrity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zhangzekun/2019/03/18/R语言面板数据分析/" rel="next" title="R语言面板数据分析">
+                <i class="fa fa-chevron-left"></i> R语言面板数据分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true" alt="Zhang Zekun">
+            
+              <p class="site-author-name" itemprop="name">Zhang Zekun</p>
+              <p class="site-description motion-element" itemprop="description">A student majored in Land Resource Management.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/zhangzekun/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/zhangzekun/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/zhangzekun/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/scuzhangzekun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="zhangzekun_2019@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#plm包简介"><span class="nav-number">1.</span> <span class="nav-text">plm包简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">2.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#界面"><span class="nav-number">3.</span> <span class="nav-text">界面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#估计接口-Estimation-interface"><span class="nav-number">3.1.</span> <span class="nav-text">估计接口(Estimation interface)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试接口-Testing-interface"><span class="nav-number">3.2.</span> <span class="nav-text">测试接口(Testing interface)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#管理数据和公式"><span class="nav-number">4.</span> <span class="nav-text">管理数据和公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构-1"><span class="nav-number">4.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">4.2.</span> <span class="nav-text">公式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#估计模型"><span class="nav-number">5.</span> <span class="nav-text">估计模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本模型"><span class="nav-number">5.1.</span> <span class="nav-text">基本模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级应用"><span class="nav-number">5.2.</span> <span class="nav-text">高级应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机效应估计值"><span class="nav-number">5.2.1.</span> <span class="nav-text">随机效应估计值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#time和two-ways的介绍"><span class="nav-number">5.2.2.</span> <span class="nav-text">time和two-ways的介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非平衡面板数据"><span class="nav-number">5.2.3.</span> <span class="nav-text">非平衡面板数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gamma-nu"><span class="nav-number">5.3.</span> <span class="nav-text">gamma        nu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-4715336-0-5188292"><span class="nav-number">5.4.</span> <span class="nav-text">0.4715336 0.5188292</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检验"><span class="nav-number">6.</span> <span class="nav-text">检验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#混合性检验-Tests-of-poolability"><span class="nav-number">6.1.</span> <span class="nav-text">混合性检验(Tests of poolability)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Zekun</span>
+</div>
+
+
+
+<span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span>人次
+ </span>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<span id="busuanzi_container_site_pv">
+总访问量:<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+<span class="post-meta-divider">|</span>
+
+
+<div class="theme-info">
+<div class="powered-by"></div>
+<span class="post-count">博客全站共18.9k字</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/zhangzekun/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/zhangzekun/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/zhangzekun/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/zhangzekun/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/zhangzekun/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/zhangzekun/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'mNDsdJBWKd9gRRIcNTquHJir-gzGzoHsz',
+        appKey: '3KGr93fcHaIr5HizTOYeHAM8',
+        placeholder: '~\(>_<)/~ 少侠，留个言吧',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
