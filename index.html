@@ -262,6 +262,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/05/20/如何将PDF文档中的数学公式插入Word/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Zekun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zekun's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/zhangzekun/2019/05/20/如何将PDF文档中的数学公式插入Word/" itemprop="url">如何将PDF文档中的数学公式插入Word</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-20T10:00:55+08:00">
+                2019-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/zhangzekun/2019/05/20/如何将PDF文档中的数学公式插入Word/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/zhangzekun/2019/05/20/如何将PDF文档中的数学公式插入Word/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  451
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>前段时间在翻译外文文献时，我发现很多文献中有很多的数学公式需要插入。我对Latex并不了解，自己一个一个在word中手动输入效率太低，但放截图又感觉太low，所以就想找一种方法能够快速的将数学公式插入到word当中。</p>
+<h1 id="需要使用的软件"><a href="#需要使用的软件" class="headerlink" title="需要使用的软件"></a>需要使用的软件</h1><p>主要用到两款软件，一个用来识别截图转化为Latex公式，一个用来转化Latex代码方便插入到Word当中。因为我是白嫖党，所以用到的软件全部不需要付费或者破解。</p>
+<ul>
+<li><a href="https://mathpix.com/" target="_blank">Mathpix Snip Tool</a></li>
+<li>任何一个在线编辑Markdown的编辑器。例如<a href="https://www.zybuluo.com/mdeditor" target="_blank">Cmd Markdown</a>，也可以是RStudio中Rmarkdown文件生成的网页，<strong>重要的是需要有<em>Show Math as MathML Code</em>的功能</strong>。</li>
+</ul>
+<h1 id="Mathpix-Snip-Tool的使用"><a href="#Mathpix-Snip-Tool的使用" class="headerlink" title="Mathpix Snip Tool的使用"></a>Mathpix Snip Tool的使用</h1><p>打开<a href="https://mathpix.com/" target="_blank">Mathpix Snip Tool</a>这个网站，找到适合自己电脑系统的版本下载下来安装。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/Latex%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8F%92%E5%85%A5word/01mathpix%20snip.png?raw=true" alt="Mathpix官网"></p>
+<p>他默认的截图快捷键是<em>Ctrl+Alt+M</em>，这个快捷键可能会与一些PDF阅读器的快捷键冲突，所以要在设置中改为不冲突的快捷键，我设置的是<em>Ctrl+Alt+F</em>。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/Latex%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8F%92%E5%85%A5word/05math.png?raw=true" alt="mathpix截图"></p>
+<p>每次你截完图他就会自动识别出图片中的数学公式，然后复制下面的Latex公式。emm，我也不知道每一行具体的含义，我用的是第二行的那个。</p>
+<h1 id="转化为MathML-Code"><a href="#转化为MathML-Code" class="headerlink" title="转化为MathML Code"></a>转化为MathML Code</h1><p>把复制的Latex公式复制到Markdown在线编辑器中，他会自动渲染出我们期望的数学公式。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/Latex%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8F%92%E5%85%A5word/02Markdown%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91%E5%99%A8.png?raw=true" alt="markdown"></p>
+<p>右键点击右边的数学公式，选择 <em>Show Math as——MathML Code</em>，然后就会跳出一个小框，复制里面的全部内容，然后以纯文本形式粘贴到word中，这样公式就出现了。</p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/Latex%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8F%92%E5%85%A5word/04html.png?raw=true" alt="MathML Code"></p>
+<p><img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/Latex%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8F%92%E5%85%A5word/06result.png?raw=true" alt="result"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/03/22/plm包简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -357,7 +533,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.7k
+                  2.9k
                 </span>
               
 
@@ -501,6 +677,16 @@
 <blockquote>
 <p>F statistic<br>data:  inv ~ value + capital<br>F = 5.7805, df1 = 18, df2 = 170, p-value = 1.219e-10<br>alternative hypothesis: unstability   </p>
 </blockquote>
+<p>当然，使用<code>pooltest()</code>函数时，我们可以只使用公式就可以得到同样的结果。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pooltest(inv~value+capital, data=Grunfeld, model=<span class="string">"within"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="独立性和时效检验"><a href="#独立性和时效检验" class="headerlink" title="独立性和时效检验"></a>独立性和时效检验</h2><p>可以添加另外两个参数来指示要计算的测试类型。参数类型为:</p>
+<ul>
+<li><code>&quot;honda&quot;</code>: Honda (1985), the default value,</li>
+<li><code>&quot;bp&quot;</code>: Breusch and Pagan (1980),</li>
+<li><code>&quot;kw&quot;</code>: King and Wu (1997),</li>
+<li><code>&quot;ghm&quot;</code>: Gourieroux, Holly, and Monfort (1982)</li>
+</ul>
+<p>测试的效果用<code>&quot;effect&quot;</code>参数表示(<code>“individual”</code>、<code>“time”</code>或<code>“twoways”</code>中的一个)。所实现的测试统计数据也适用于不平衡面板。</p>
 
           
         
@@ -1740,201 +1926,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/03/10/QGIS视频/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhang Zekun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://github.com/scuzhangzekun/blog_pictures/blob/master/avatar.jpg?raw=true">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zekun's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/zhangzekun/2019/03/10/QGIS视频/" itemprop="url">QGIS视频</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T10:57:31+08:00">
-                2019-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/zhangzekun/categories/QGIS/" itemprop="url" rel="index">
-                    <span itemprop="name">QGIS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/zhangzekun/2019/03/10/QGIS视频/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/zhangzekun/2019/03/10/QGIS视频/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  128
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这是一个系列视频，后续将会不断更新。</p>
-<h1 id="1-初始化设置"><a href="#1-初始化设置" class="headerlink" title="1.初始化设置"></a>1.初始化设置</h1><iframe src="//player.bilibili.com/player.html?aid=44494223&cid=77898461&page=1" scrolling="no" height="452" width="100%" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-<p>这一部分主要讲解了以下内容</p>
-<ul>
-<li>如何获取软件</li>
-<li>如何获取训练数据</li>
-<li>初始化中文界面如何设置</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/zhangzekun/2019/03/10/QGIS视频/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://scuzhangzekun.github.io/zhangzekun/2019/03/10/2018年好物分享/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2365,7 +2356,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/zhangzekun/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2376,7 +2367,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/zhangzekun/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2457,7 +2448,7 @@
 
 <div class="theme-info">
 <div class="powered-by"></div>
-<span class="post-count">博客全站共18.9k字</span>
+<span class="post-count">博客全站共19.4k字</span>
 </div>
 
 
