@@ -405,6 +405,7 @@
 <p>分析纵向数据模型都有一个基本点，那就是 <strong>把不同的个体的差异作为随机效应加入回归模型之中以用来反映个体差异对重复测量的结果的影响</strong> 。这些随机效应描述了每个对象的度量随时间的变化，并解释了纵向数据的相关结构。</p>
 <p>面板数据分析当中往往还有固定效应的部分，固定效应可以理解为类似通常的线性模型。</p>
 <h1 id="从一个例子开始了解"><a href="#从一个例子开始了解" class="headerlink" title="从一个例子开始了解"></a>从一个例子开始了解</h1><p>这里有一份数据集为了探究79头澳大利亚的奶牛牛奶蛋白含量和三种饲料的关系，对每头奶牛计划观测19次，每周一次，但有的观察了19周有的观测不到19周，有的只观测12周。各变量的内容如下。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -436,6 +437,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p> <img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E9%9D%A2%E6%9D%BF%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/cows/1%E6%95%B0%E6%8D%AE%E9%A2%84%E8%A7%88.png?raw=true" alt="数据预览"></p>
 <p>这样我们先假设一个简单的线性模型。</p>
 <p> <img src="https://github.com/scuzhangzekun/blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E9%9D%A2%E6%9D%BF%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/cows/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B.jpg?raw=true" alt="简单线性模型"></p>
