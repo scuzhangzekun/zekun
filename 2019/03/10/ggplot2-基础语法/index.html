@@ -423,6 +423,7 @@
 <p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/3.png?raw=true" alt="plot2"></p>
 <p>从图中我们看到，每个点的颜色和形状代表了不同的汽车发动机气缸数量，而不同的分组和面则表示了变速箱类型（自动还是手动），发动机装置（V型还是直列式）</p>
 <h1 id="常见的几何函数指定图形类型"><a href="#常见的几何函数指定图形类型" class="headerlink" title="常见的几何函数指定图形类型"></a>常见的几何函数指定图形类型</h1><p>ggplot()需要我们指定绘制的数据源和变量，几何函数则是制定我们需要绘制图表的类型。常见的图表有以下这些：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -499,7 +500,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>对于这些函数中的选项，其实也是有章可循的。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -554,6 +557,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>用我们最常见的mtcars数据集创建一个箱线图。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ggplot(mtcars, aes(x=factor(gear),y=disp))+</span><br><span class="line">  geom_boxplot(fill=<span class="string">"cornflowerblue"</span>,</span><br><span class="line">               color=<span class="string">"black"</span>,notch = <span class="literal">FALSE</span>) +</span><br><span class="line">  geom_point(position = <span class="string">"jitter"</span>,color=<span class="string">"red"</span>,alpha=<span class="number">.5</span>) +</span><br><span class="line">  geom_rug(sides = <span class="string">"l"</span>, color=<span class="string">"orange"</span>)</span><br></pre></td></tr></table></figure>
 <p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/ggplot2%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/4.png?raw=true" alt="plot3"></p>

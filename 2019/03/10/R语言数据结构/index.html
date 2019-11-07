@@ -468,6 +468,7 @@
 <p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/9.png?raw=true" alt="d"></p>
 <p><img src="https://github.com/scuzhangzekun/resume_blog_pictures/blob/master/R%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.png?raw=true" alt="d"></p>
 <p>为了我们后面分享的方便，在这里对这个数据集的各个维度的内容进行翻译。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -522,6 +523,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>那现在我们需要提取 mpg 这一列，我们需要写出这样的代码：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mtcars$mpg</span><br><span class="line"><span class="comment">#如果你想提取这一列的特定行数的数据可以执行下面的代码</span></span><br><span class="line">mtcars$mpg[c(<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>)]</span><br></pre></td></tr></table></figure>
 <p>在执行的时候我们会产生一个新的想法：我不想每次都执行 mtcars$[列名称] ，那么应该怎么办呢？这就牵出了另一个知识点。</p>
